@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { EyeSlash, Eye } from "phosphor-react";
+import styled, { css } from "styled-components";
 
 export const InputContainer = styled.div`
   display: flex;
@@ -9,6 +10,8 @@ export const InputContainer = styled.div`
   gap: 0.5rem;
 
   width: 100%;
+
+  position: relative;
 `;
 
 export const StyledLabel = styled.label`
@@ -34,4 +37,28 @@ export const StyledInput = styled.input`
     color: var(--text-primary);
     opacity: 0.45;
   }
+`;
+
+const iconCSS = css`
+  font-size: 20px;
+  color: var(--text-secondary);
+`;
+
+export const Button = styled.button`
+  position: absolute;
+  right: 1rem;
+  top: 55%;
+
+  background-color: var(--surface-input);
+  border: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export const SlashEyeIcon = styled(EyeSlash)`
+  ${iconCSS}
+`;
+
+export const OpenEyeIcon = styled(Eye)`
+  ${iconCSS}
 `;
