@@ -37,6 +37,9 @@ export const GlobalStyles = createGlobalStyle`
         --text-primary: #22394A;
         --text-secondary: #6C7C80;
         --text-info: #187FF4;
+
+        --brand-outline: #39AE6D;
+        --info-outline: #1162D1;
     }
 
     #root {
