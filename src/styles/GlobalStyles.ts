@@ -5,7 +5,9 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: 'Ubuntu', sans-serif;
     }
+    
 
     body {
         font-family: 'Ubuntu', sans-serif;
@@ -34,6 +36,7 @@ export const GlobalStyles = createGlobalStyle`
         --text-on-brand: #FFF;
         --text-primary: #22394A;
         --text-secondary: #6C7C80;
+        --text-info: #187FF4;
     }
 
     #root {

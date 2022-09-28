@@ -10,10 +10,18 @@ export const Container = styled.div`
 export const Icon = styled(Recycle)`
   color: var(--brand);
   font-size: 2rem;
+
+  @media (min-width: 430px) {
+    font-size: 3rem;
+  }
 `;
 
 export const Name = styled.div`
   font-size: 2rem;
   color: var(--text-primary);
   font-weight: 500;
+
+  @media (min-width: 430px) {
+    font-size: 3rem;
+  }
 `;
