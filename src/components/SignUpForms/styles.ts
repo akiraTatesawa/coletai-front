@@ -8,4 +8,5 @@ export const Forms = styled.form`
   gap: 1.2rem;
 
   width: 100%;
+  max-width: 700px;
 `;

@@ -26,6 +26,7 @@ export const RegistrationContainer = styled.section`
   background-color: var(--surface-secondary);
 
   width: 100%;
+  max-width: 700px;
   height: 100%;
 
   border-radius: 10px;
