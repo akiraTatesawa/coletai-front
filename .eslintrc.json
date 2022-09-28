@@ -26,6 +26,7 @@
         "prettier"
     ],
     "rules": {
+        "react/jsx-props-no-spreading": "off",
         "camelcase": "off",
         "import/no-unresolved": "error",
         "@typescript-eslint/naming-convention": [
@@ -34,11 +35,7 @@
                 "selector": "interface",
                 "format": [
                     "PascalCase"
-                ],
-                "custom": {
-                    "regex": "^I[A-Z]",
-                    "match": false
-                }
+                ]
             }
         ],
         "class-methods-use-this": "off",
