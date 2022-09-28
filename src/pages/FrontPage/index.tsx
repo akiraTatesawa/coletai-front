@@ -17,7 +17,7 @@ export function FrontPage() {
           <PrimaryButton handleClick={() => navigate("/sign-up/cooperative")}>
             Cadastrar uma nova cooperativa
           </PrimaryButton>
-          <PrimaryButton handleClick={() => navigate("sign-up/user")}>
+          <PrimaryButton handleClick={() => navigate("/sign-up/user")}>
             Cadastrar um novo usuário
           </PrimaryButton>
         </Buttons>

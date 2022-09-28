@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   width: 100%;
+  max-width: 700px;
   height: 3rem;
 
   background-color: var(--brand);

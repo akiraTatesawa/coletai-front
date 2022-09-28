@@ -10,6 +10,11 @@ export const Main = styled.main`
   width: 100%;
 
   gap: 3rem;
+
+  @media (min-width: 1025px) {
+    margin: 0 auto;
+    max-width: 1250px;
+  }
 `;
 
 export const Content = styled.div`
@@ -19,6 +24,10 @@ export const Content = styled.div`
   gap: 3rem;
 
   width: 100%;
+
+  @media (min-width: 1025px) {
+    flex-direction: row;
+  }
 `;
 
 export const Buttons = styled.div`

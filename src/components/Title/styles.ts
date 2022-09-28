@@ -11,7 +11,7 @@ export const Icon = styled(Recycle)`
   color: var(--brand);
   font-size: 2rem;
 
-  @media (min-width: 430px) {
+  @media (min-width: 1025px) {
     font-size: 3rem;
   }
 `;
@@ -21,7 +21,7 @@ export const Name = styled.div`
   color: var(--text-primary);
   font-weight: 500;
 
-  @media (min-width: 430px) {
+  @media (min-width: 1025px) {
     font-size: 3rem;
   }
 `;
