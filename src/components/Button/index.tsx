@@ -1,16 +1,24 @@
-import { MouseEventHandler, ReactNode } from "react";
+import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 import { Button } from "./styles";
 
-interface PrimaryButtonProps {
+interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
+  handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export function PrimaryButton({ handleClick, children }: PrimaryButtonProps) {
+export function PrimaryButton({
+  type = "button",
+  handleClick,
+  children,
+}: PrimaryButtonProps) {
   return (
-    <Button type="button" onClick={handleClick}>
+    <Button type={type} onClick={handleClick}>
       {children}
     </Button>
   );
 }
+
+PrimaryButton.defaultProps = {
+  handleClick: undefined,
+};

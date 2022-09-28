@@ -9,4 +9,8 @@ export const Forms = styled.form`
 
   width: 100%;
   max-width: 700px;
+
+  > button[type="submit"] {
+    margin-top: 2rem;
+  }
 `;
