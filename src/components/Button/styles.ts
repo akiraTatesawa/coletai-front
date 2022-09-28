@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const Button = styled.button`
   width: 100%;
   max-width: 700px;
-  height: 3rem;
+  min-height: 3rem;
+
+  padding: 16px 14px;
 
   background-color: var(--brand);
   transition: background-color 500ms ease-in-out;
@@ -18,5 +20,10 @@ export const Button = styled.button`
   &:hover {
     background-color: var(--brand-hover);
     transition: background-color 300ms ease-in-out;
+  }
+
+  &:focus {
+    outline-color: var(--brand-outline);
+    outline-offset: 2px;
   }
 `;

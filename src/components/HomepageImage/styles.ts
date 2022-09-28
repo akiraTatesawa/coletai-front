@@ -8,6 +8,7 @@ export const Image = styled.img`
   aspect-ratio: 3/2;
 
   @media (min-width: 1025px) {
-    width: 50%;
+    max-width: unset;
+    width: 60%;
   }
 `;
