@@ -6,6 +6,11 @@ export function RouterNavigator() {
   return (
     <Routes>
       <Route path="/" element={<Pages.FrontPage />} />
+      <Route
+        path="/sign-up/cooperative"
+        element={<Pages.CooperativeRegistrationPage />}
+      />
+      <Route path="/sign-up/user" element={<Pages.UserRegistrationPage />} />
     </Routes>
   );
 }
