@@ -6,7 +6,7 @@ export const Main = styled.main`
   align-items: center;
   justify-content: center;
 
-  height: 100%;
+  height: fit-content;
   width: 100%;
 
   gap: 3rem;
@@ -27,7 +27,7 @@ export const RegistrationContainer = styled.section`
 
   width: 100%;
   max-width: 700px;
-  height: 100%;
+  height: fit-content;
 
   border-radius: 10px;
 
