@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
+import { Loader } from "../Loader";
 import { Button } from "./styles";
 
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,7 +16,7 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   return (
     <Button {...props} type={type} onClick={handleClick}>
-      {children}
+      {props.disabled ? <Loader /> : children}
     </Button>
   );
 }

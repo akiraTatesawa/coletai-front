@@ -17,6 +17,10 @@ export const Button = styled.button`
   font-weight: 500;
   color: var(--text-on-brand);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     background-color: var(--brand-hover);
     transition: background-color 300ms ease-in-out;
