@@ -26,4 +26,9 @@ export const Button = styled.button`
     outline-color: var(--brand-outline);
     outline-offset: 2px;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;

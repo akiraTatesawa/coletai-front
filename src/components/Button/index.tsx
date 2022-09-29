@@ -11,9 +11,10 @@ export function PrimaryButton({
   type = "button",
   handleClick,
   children,
+  ...props
 }: PrimaryButtonProps) {
   return (
-    <Button type={type} onClick={handleClick}>
+    <Button {...props} type={type} onClick={handleClick}>
       {children}
     </Button>
   );
