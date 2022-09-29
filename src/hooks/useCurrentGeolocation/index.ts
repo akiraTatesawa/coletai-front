@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
-type Coords = [number, number];
+import { Coords } from "../../@types/MapTypes";
 
 export function useCurrentGeolocation() {
-  const [currentLocation, setCurrentLocation] = useState<Coords>();
+  const [currentLocation, setCurrentLocation] = useState<Coords | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) =>

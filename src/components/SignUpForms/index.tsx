@@ -1,5 +1,7 @@
+import { LatLngLiteral } from "leaflet";
 import { ChangeEvent, FormEvent, useState } from "react";
 
+import { useCurrentGeolocation } from "../../hooks/useCurrentGeolocation";
 import { PrimaryButton } from "../Button";
 import { Input } from "../Input";
 import { RegistrationMap } from "../RegistrationMap/index";
@@ -13,10 +15,13 @@ interface IInputRegistrationData {
   name?: string;
   email?: string;
   password?: string;
+  coords?: LatLngLiteral;
 }
 
 export function SignUpForms({ registrationName }: SignUpFormsProps) {
   const preposition = registrationName === "cooperativa" ? "da" : "do";
+  const { currentLocation } = useCurrentGeolocation();
+
   const [inputRegistrationData, setInputRegistrationData] =
     useState<IInputRegistrationData | null>(null);
 
@@ -28,7 +33,14 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
 
   function handleRegistrationSubmit(event: FormEvent) {
     event.preventDefault();
-    setInputRegistrationData(null);
+
+    if (!inputRegistrationData?.coords) {
+      console.log("Missing data");
+      return;
+    }
+    // setInputRegistrationData(null);
+
+    console.log(inputRegistrationData);
   }
 
   return (
@@ -63,7 +75,16 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         placeholder="Senha da conta"
         required
       />
-      <RegistrationMap />
+
+      {currentLocation && (
+        <RegistrationMap
+          registrationCoords={(coords: LatLngLiteral) =>
+            setInputRegistrationData({ ...inputRegistrationData, coords })
+          }
+          currentLocation={currentLocation}
+        />
+      )}
+
       <PrimaryButton type="submit">Cadastrar</PrimaryButton>
     </Forms>
   );

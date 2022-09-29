@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "leaflet": "^1.9.1",
+    "leaflet-control-geocoder": "^2.4.0",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
