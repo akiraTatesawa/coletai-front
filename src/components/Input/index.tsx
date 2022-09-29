@@ -46,6 +46,7 @@ export function Input({ id, name, label, type, ...props }: InputProps) {
     <ButtonEyeIcon
       isVisible={isPasswordVisible}
       onClick={() => togglePasswordVisibility()}
+      disabled={props.disabled}
     />
   );
 
