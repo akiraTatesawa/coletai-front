@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         font-family: 'Ubuntu', sans-serif;
-        height: 100vh;
+        height: max-content;
         padding: 40px 30px;
     }
 

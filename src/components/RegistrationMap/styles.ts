@@ -31,4 +31,8 @@ export const Map = styled(MapContainer)`
   width: 100%;
 
   border-radius: 10px;
+
+  @media (min-width: 600px) {
+    height: 45vh;
+  }
 `;
