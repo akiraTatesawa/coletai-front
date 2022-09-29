@@ -113,7 +113,7 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         />
       )}
 
-      <PrimaryButton type="submit" isDisabled={isLoading}>
+      <PrimaryButton type="submit" disabled={isLoading}>
         Cadastrar
       </PrimaryButton>
     </Forms>

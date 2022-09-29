@@ -5,17 +5,16 @@ import { Button } from "./styles";
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
-  isDisabled: boolean;
 }
 
 export function PrimaryButton({
   type = "button",
   handleClick,
   children,
-  isDisabled,
+  ...props
 }: PrimaryButtonProps) {
   return (
-    <Button disabled={isDisabled} type={type} onClick={handleClick}>
+    <Button {...props} type={type} onClick={handleClick}>
       {children}
     </Button>
   );
