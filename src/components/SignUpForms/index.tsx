@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { PrimaryButton } from "../Button";
 import { Input } from "../Input";
+import { RegistrationMap } from "../RegistrationMap/index";
 import { Forms } from "./styles";
 
 interface SignUpFormsProps {
@@ -62,6 +63,7 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         placeholder="Senha da conta"
         required
       />
+      <RegistrationMap />
       <PrimaryButton type="submit">Cadastrar</PrimaryButton>
     </Forms>
   );
