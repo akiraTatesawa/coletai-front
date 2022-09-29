@@ -37,6 +37,11 @@ export const StyledInput = styled.input`
     color: var(--text-primary);
     opacity: 0.45;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
 
 const iconCSS = css`
@@ -53,6 +58,12 @@ export const Button = styled.button`
   border: none;
   padding: 0;
   margin: 0;
+
+  &:disabled {
+    background-color: var(--surface-input);
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
 
 export const SlashEyeIcon = styled(EyeSlash)`
