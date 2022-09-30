@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { TileLayer, Marker, useMapEvents, Popup } from "react-leaflet";
 
 import { Coords } from "../../@types/MapTypes";
+import { useToast } from "../../hooks/useToast/index";
 import { Fieldset, Map, Legend } from "./styles";
 
 function LocationMarker({
@@ -13,6 +14,7 @@ function LocationMarker({
 }) {
   const [markedPosition, setMarkedPosition] = useState<LatLng>();
   const [address, setAddress] = useState<string>("Sua localização");
+  const { callToast } = useToast();
 
   const map = useMapEvents({
     click: ({ latlng }) => {
@@ -31,12 +33,19 @@ function LocationMarker({
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${markedPosition?.lat}&lon=${markedPosition?.lng}`
       );
 
-      promise.then(({ data }) => {
-        console.log(data);
-        setAddress(
-          `${data.address.road}, ${data.address.postcode}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
+      promise
+        .then(({ data }) => {
+          setAddress(
+            `${data.address.road}, ${data.address.postcode}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
+          );
+        })
+        .catch(() =>
+          callToast({
+            message: "Houve um erro ao tentar buscar o endereço",
+            toastType: "error",
+            id: 9,
+          })
         );
-      });
     }
 
     return () => {
