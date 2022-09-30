@@ -1,5 +1,6 @@
+import axios from "axios";
 import { LatLng, LatLngLiteral } from "leaflet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TileLayer, Marker, useMapEvents, Popup } from "react-leaflet";
 
 import { Coords } from "../../@types/MapTypes";
@@ -11,6 +12,8 @@ function LocationMarker({
   registrationCoords: (coords: LatLngLiteral) => void;
 }) {
   const [markedPosition, setMarkedPosition] = useState<LatLng>();
+  const [address, setAddress] = useState<string>("Sua localização");
+
   const map = useMapEvents({
     click: ({ latlng }) => {
       map.setView(latlng, 17);
@@ -19,9 +22,31 @@ function LocationMarker({
       registrationCoords({ lat: latlng.lat, lng: latlng.lng });
     },
   });
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    if (markedPosition) {
+      const promise = axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${markedPosition?.lat}&lon=${markedPosition?.lng}`
+      );
+
+      promise.then(({ data }) => {
+        console.log(data);
+        setAddress(
+          `${data.address.road}, ${data.address.postcode}, ${data.address.city}, ${data.address.state}, ${data.address.country}`
+        );
+      });
+    }
+
+    return () => {
+      abortController.abort();
+    };
+  }, [markedPosition]);
+
   return markedPosition ? (
     <Marker position={markedPosition}>
-      <Popup>Sua localização</Popup>
+      <Popup>{address}</Popup>
     </Marker>
   ) : null;
 }
