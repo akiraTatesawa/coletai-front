@@ -39,3 +39,12 @@ export const LoginTitle = styled.h2`
   font-weight: 500;
   color: var(--text-primary);
 `;
+
+export const LoginTypeContainer = styled.div`
+  display: flex;
+
+  justify-content: space-evenly;
+
+  width: 100%;
+  max-width: 260px;
+`;
