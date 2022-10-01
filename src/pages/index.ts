@@ -1,4 +1,5 @@
 import { FrontPage } from "./FrontPage/index";
+import { LoginPage } from "./LoginPage/index";
 import { RegistrationPage } from "./RegistrationPage/index";
 
 export const Pages = {
@@ -11,4 +12,5 @@ export const Pages = {
     RegistrationPage({
       registrationType: "user",
     }),
+  LoginPage,
 };
