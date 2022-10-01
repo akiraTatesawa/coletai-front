@@ -18,4 +18,11 @@ export const Button = styled.button<{ isSelected: boolean }>`
 
   font-size: 14px;
   color: var(--text-primary);
+
+  @media (min-width: 600px) {
+    width: 8.25rem;
+    height: 8.25rem;
+
+    font-size: 1rem;
+  }
 `;

@@ -38,6 +38,10 @@ export const LoginTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--text-primary);
+
+  @media (min-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 export const LoginTypeContainer = styled.div`
@@ -47,4 +51,8 @@ export const LoginTypeContainer = styled.div`
 
   width: 100%;
   max-width: 260px;
+
+  @media (min-width: 600px) {
+    max-width: 320px;
+  }
 `;
