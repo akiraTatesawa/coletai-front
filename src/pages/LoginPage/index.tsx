@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-
+import { LoginForms } from "../../components/LoginForms";
 import { LoginTypeButton } from "../../components/LoginTypeButton";
 import { Title } from "../../components/Title";
 import { useLoginType } from "../../hooks/useLoginType/index";
@@ -31,6 +30,7 @@ export function LoginPage() {
             loginType="user"
           />
         </LoginTypeContainer>
+        {(isUser || isCooperative) && <LoginForms />}
       </LoginContainer>
     </Main>
   );
