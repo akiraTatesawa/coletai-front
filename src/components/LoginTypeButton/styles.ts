@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.button<{ isSelected: boolean }>`
   width: 6.25rem;
   height: 6.25rem;
 
-  border: none;
+  border: ${(props) => (props.isSelected ? "1px solid var(--brand)" : "none")};
   border-radius: 10px;
 
   background-color: var(--surface-brand);

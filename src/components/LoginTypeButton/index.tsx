@@ -9,6 +9,7 @@ type LoginType = "cooperative" | "user";
 interface LoginTypeButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loginType: LoginType;
+  isSelected: boolean;
 }
 
 interface ButtonData {
@@ -16,7 +17,11 @@ interface ButtonData {
   type: "cooperativa" | "usuário";
 }
 
-export function LoginTypeButton({ loginType, ...props }: LoginTypeButtonProps) {
+export function LoginTypeButton({
+  loginType,
+  isSelected,
+  ...props
+}: LoginTypeButtonProps) {
   const cooperativeData: ButtonData = {
     image: Cooperative,
     type: "cooperativa",
@@ -31,7 +36,7 @@ export function LoginTypeButton({ loginType, ...props }: LoginTypeButtonProps) {
     loginType === "cooperative" ? { ...cooperativeData } : { ...userData };
 
   return (
-    <Button type="button">
+    <Button type="button" {...props} isSelected={isSelected}>
       <img src={loginData.image} alt={`${loginType} illustration`} />
       {loginData.type}
     </Button>
