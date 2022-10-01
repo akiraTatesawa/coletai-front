@@ -11,6 +11,7 @@ export function RouterNavigator() {
         element={<Pages.CooperativeRegistrationPage />}
       />
       <Route path="/sign-up/user" element={<Pages.UserRegistrationPage />} />
+      <Route path="/sign-in" element={<Pages.LoginPage />} />
     </Routes>
   );
 }
