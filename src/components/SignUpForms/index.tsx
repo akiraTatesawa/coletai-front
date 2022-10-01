@@ -1,7 +1,7 @@
 import { LatLngLiteral } from "leaflet";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { IInputRegistrationData } from "../../@types/CooperativeTypes";
+import { IInputRegistrationData } from "../../@types/AuthTypes";
 import { useCurrentGeolocation } from "../../hooks/useCurrentGeolocation";
 import { useSetRegistrationData } from "../../hooks/useSetRegistrationData/index";
 import { useToast } from "../../hooks/useToast/index";
