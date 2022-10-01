@@ -1,3 +1,5 @@
+import AnimateHeight from "react-animate-height";
+
 import { LoginForms } from "../../components/LoginForms";
 import { LoginTypeButton } from "../../components/LoginTypeButton";
 import { Title } from "../../components/Title";
@@ -30,7 +32,14 @@ export function LoginPage() {
             loginType="user"
           />
         </LoginTypeContainer>
-        {(isUser || isCooperative) && <LoginForms />}
+
+        <AnimateHeight
+          height={isCooperative || isUser ? "auto" : 0}
+          duration={500}
+          style={{ width: "100%" }}
+        >
+          <LoginForms route={route} />
+        </AnimateHeight>
       </LoginContainer>
     </Main>
   );

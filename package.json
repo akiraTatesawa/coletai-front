@@ -16,6 +16,7 @@
     "leaflet-control-geocoder": "^2.4.0",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
+    "react-animate-height": "^3.0.4",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.1.0",
     "react-query": "^3.39.2",

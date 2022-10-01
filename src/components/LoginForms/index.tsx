@@ -2,7 +2,11 @@ import { PrimaryButton } from "../Button";
 import { Input } from "../Input";
 import { Forms } from "./styles";
 
-export function LoginForms() {
+interface LoginFormsProps {
+  route: "cooperatives" | "users" | null;
+}
+
+export function LoginForms({ route }: LoginFormsProps) {
   return (
     <Forms>
       <Input
