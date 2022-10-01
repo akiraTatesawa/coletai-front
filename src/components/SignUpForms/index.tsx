@@ -1,10 +1,7 @@
-import { LatLngLiteral } from "leaflet";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useEffect } from "react";
 
-import { IInputRegistrationData } from "../../@types/AuthTypes";
 import { useCurrentGeolocation } from "../../hooks/useCurrentGeolocation";
-import { useSetRegistrationData } from "../../hooks/useSetRegistrationData/index";
-import { useToast } from "../../hooks/useToast/index";
+import { useRegistrationForms } from "../../hooks/useRegistrationForms/index";
 import { PrimaryButton } from "../Button";
 import { Input } from "../Input";
 import { RegistrationMap } from "../RegistrationMap/index";
@@ -14,89 +11,68 @@ interface SignUpFormsProps {
   registrationName: "cooperativa" | "usuário";
 }
 
-type InputData = Partial<IInputRegistrationData>;
-
 export function SignUpForms({ registrationName }: SignUpFormsProps) {
   const preposition = registrationName === "cooperativa" ? "da" : "do";
   const { currentLocation } = useCurrentGeolocation();
-  const { callToast } = useToast();
-  const { setPath } = useSetRegistrationData();
-  const { create, isLoading } = setPath(registrationName);
+  const {
+    registrationData,
+    handleInputChange,
+    handleSubmitLoginData,
+    setAxiosFunction,
+    mutation,
+    setCoords,
+  } = useRegistrationForms();
 
-  const [inputRegistrationData, setInputRegistrationData] =
-    useState<InputData | null>(null);
-
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const { name } = event.target;
-    const { value } = event.target;
-    setInputRegistrationData({ ...inputRegistrationData, [name]: value });
-  }
-
-  async function handleRegistrationSubmit(event: FormEvent) {
-    event.preventDefault();
-
-    if (!inputRegistrationData?.latitude) {
-      callToast({
-        message: "Selecione um endereço no mapa",
-        toastType: "error",
-        id: 1,
-      });
-      return;
+  useEffect(() => {
+    if (registrationName) {
+      setAxiosFunction(registrationName);
     }
-
-    create(inputRegistrationData as IInputRegistrationData);
-  }
+  }, [registrationName]);
 
   return (
-    <Forms onSubmit={(e) => handleRegistrationSubmit(e)}>
+    <Forms onSubmit={handleSubmitLoginData}>
       <Input
         id="name"
         label="Nome"
         name="name"
         type="text"
-        value={inputRegistrationData?.name || ""}
-        onChange={(e) => handleInputChange(e)}
+        value={registrationData?.name || ""}
+        onChange={handleInputChange}
         placeholder={`Nome ${preposition} ${registrationName}`}
         required
-        disabled={isLoading}
+        disabled={mutation.isLoading}
       />
       <Input
         id="email"
         label="Email"
         name="email"
         type="email"
-        value={inputRegistrationData?.email || ""}
-        onChange={(e) => handleInputChange(e)}
+        value={registrationData?.email || ""}
+        onChange={handleInputChange}
         placeholder={`Email ${preposition} ${registrationName}`}
         required
-        disabled={isLoading}
+        disabled={mutation.isLoading}
       />
       <Input
         id="password"
         label="Senha"
         name="password"
         type="password"
-        value={inputRegistrationData?.password || ""}
-        onChange={(e) => handleInputChange(e)}
+        value={registrationData?.password || ""}
+        onChange={handleInputChange}
         placeholder="Senha da conta"
         required
-        disabled={isLoading}
+        disabled={mutation.isLoading}
       />
 
       {currentLocation && (
         <RegistrationMap
-          registrationCoords={(coords: LatLngLiteral) =>
-            setInputRegistrationData({
-              ...inputRegistrationData,
-              latitude: coords.lat,
-              longitude: coords.lng,
-            })
-          }
+          registrationCoords={setCoords}
           currentLocation={currentLocation}
         />
       )}
 
-      <PrimaryButton type="submit" disabled={isLoading}>
+      <PrimaryButton type="submit" disabled={mutation.isLoading}>
         Cadastrar
       </PrimaryButton>
     </Forms>

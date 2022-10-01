@@ -1,4 +1,5 @@
 import { AxiosResponse, AxiosError } from "axios";
+import { LatLngLiteral } from "leaflet";
 import React from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,13 @@ export function useRegistrationForms() {
 
   const navigate = useNavigate();
 
+  const setCoords = (coords: LatLngLiteral) =>
+    setRegistrationData({
+      ...registrationData,
+      latitude: coords.lat,
+      longitude: coords.lng,
+    });
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
     const { value } = event.target;
@@ -48,7 +56,7 @@ export function useRegistrationForms() {
         toastType: "success",
       });
 
-      setTimeout(() => navigate("/sign-in"), 600);
+      setTimeout(() => navigate("/sign-in"), 1200);
     },
     onError: (data: AxiosError<IAxiosErrorData>) => {
       callToast({
@@ -67,11 +75,21 @@ export function useRegistrationForms() {
   const handleSubmitLoginData = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (!registrationData?.latitude) {
+      callToast({
+        message: "Selecione um endereço no mapa",
+        toastType: "error",
+        id: 1,
+      });
+      return;
+    }
+
     mutation.mutate(registrationData as IInputRegistrationData);
   };
 
   return {
     registrationData,
+    setCoords,
     handleInputChange,
     handleSubmitLoginData,
     setAxiosFunction,

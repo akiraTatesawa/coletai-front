@@ -49,7 +49,9 @@ export function LoginForms({ route }: LoginFormsProps) {
         disabled={mutation.isLoading}
       />
 
-      <PrimaryButton type="submit">Entrar</PrimaryButton>
+      <PrimaryButton disabled={mutation.isLoading} type="submit">
+        Entrar
+      </PrimaryButton>
     </Forms>
   );
 }
