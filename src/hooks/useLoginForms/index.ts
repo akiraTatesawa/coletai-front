@@ -30,10 +30,14 @@ export function useLoginForms() {
         toastType: "error",
       });
 
-      setLoginData(null);
+      if (data.response?.status === 401) {
+        setLoginData({ ...loginData, password: "" });
+      } else {
+        setLoginData(null);
+      }
     },
     onSettled: () => {
-      queryClient.invalidateQueries("create");
+      queryClient.invalidateQueries("login");
     },
   });
 
