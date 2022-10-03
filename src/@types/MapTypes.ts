@@ -5,6 +5,7 @@ type NominatimAddress = {
   village: string;
   state_district: string;
   state: string;
+  city: string;
   postcode: string;
   country: string;
   country_code: string;
