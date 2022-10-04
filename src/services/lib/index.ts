@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { IApiCreateCollection } from "../../@types/APITypes";
 import {
   IInputLoginData,
   IInputRegistrationData,
@@ -31,4 +32,11 @@ export async function loginCooperative(loginData: IInputLoginData) {
   const promise = await api.post("/cooperatives/sign-in", loginData);
 
   return promise.data;
+}
+
+export async function createCollection({
+  collectionData,
+  config,
+}: IApiCreateCollection) {
+  return api.post("/collections", collectionData, config);
 }

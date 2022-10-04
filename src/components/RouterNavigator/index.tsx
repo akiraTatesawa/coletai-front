@@ -12,6 +12,7 @@ export function RouterNavigator() {
       />
       <Route path="/sign-up/user" element={<Pages.UserRegistrationPage />} />
       <Route path="/sign-in" element={<Pages.LoginPage />} />
+      <Route path="/dashboard" element={<Pages.DashboardPage />} />
     </Routes>
   );
 }
