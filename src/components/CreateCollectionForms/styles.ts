@@ -64,18 +64,50 @@ export const Forms = styled.form`
   gap: 0.875rem;
 `;
 
+export const TypesContainer = styled.div`
+  width: 100%;
+  height: max-content;
+  padding: 0.5rem 0;
+
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 0.5rem;
+`;
+
+export const RecyclingType = styled.button<{ isSelected: boolean }>`
+  padding: 0.65rem;
+  width: calc(50% - 0.25rem);
+
+  background-color: ${(props) =>
+    props.isSelected ? "var(--surface-brand)" : "var(--surface-input)"};
+  border: none;
+  border-radius: 5px;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${(props) =>
+    props.isSelected ? "var(--brand)" : "var(--text-secondary)"};
+
+  opacity: ${(props) => (props.isSelected ? "1" : "0.5")};
+`;
+
 export const DescriptionTextarea = styled.textarea`
   width: 100%;
   height: 8rem;
 
   resize: none;
 
-  background-color: var(--surface-primary);
+  background-color: var(--surface-input);
 
   border: none;
   border-radius: 6px;
 
-  padding: 0.5rem;
+  padding: 0.85rem;
 
   color: var(--text-primary);
   font-size: 1rem;
