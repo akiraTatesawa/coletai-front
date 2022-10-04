@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import { IAccountData } from "../../@types/AccountTypes";
 import { PrimaryButton } from "../../components/Button";
 import { HomepageImage } from "../../components/HomepageImage/index";
 import { Title } from "../../components/Title";
+import { useLocalStorage } from "../../hooks/useLocalStorage/index";
 import {
   Main,
   Content,
@@ -14,6 +16,25 @@ import {
 
 export function FrontPage() {
   const navigate = useNavigate();
+  const [accountData] = useLocalStorage<IAccountData | null>(
+    "coletaiAccountData",
+    null
+  );
+
+  const frontPageButtons = !accountData ? (
+    <>
+      <PrimaryButton handleClick={() => navigate("/sign-up/cooperative")}>
+        Cadastrar cooperativa
+      </PrimaryButton>
+      <PrimaryButton handleClick={() => navigate("/sign-up/user")}>
+        Cadastrar usuário
+      </PrimaryButton>
+    </>
+  ) : (
+    <PrimaryButton handleClick={() => navigate("/dashboard")}>
+      Ir para dashboard
+    </PrimaryButton>
+  );
 
   return (
     <Main>
@@ -30,18 +51,13 @@ export function FrontPage() {
             </p>
           </IntroductionText>
 
-          <Buttons>
-            <PrimaryButton handleClick={() => navigate("/sign-up/cooperative")}>
-              Cadastrar cooperativa
-            </PrimaryButton>
-            <PrimaryButton handleClick={() => navigate("/sign-up/user")}>
-              Cadastrar usuário
-            </PrimaryButton>
-          </Buttons>
+          <Buttons>{frontPageButtons}</Buttons>
 
-          <Redirect>
-            Já possui cadastro? <Link to="/sign-in">Login</Link>
-          </Redirect>
+          {!accountData && (
+            <Redirect>
+              Já possui cadastro? <Link to="/sign-in">Login</Link>
+            </Redirect>
+          )}
         </ButtonContainer>
       </Content>
     </Main>
