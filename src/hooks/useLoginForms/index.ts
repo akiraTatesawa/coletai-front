@@ -1,6 +1,7 @@
 import { AxiosResponse, AxiosError } from "axios";
 import React from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 import { IAccountData, IAccountContext } from "../../@types/AccountTypes";
 import { IAxiosErrorData } from "../../@types/APITypes";
@@ -21,6 +22,7 @@ export function useLoginForms() {
   const [loginService, setLoginService] = React.useState<LoginService>(
     () => loginUser
   );
+  const navigate = useNavigate();
 
   const { callToast } = useToast();
   const [accountData, setAccountData] = useLocalStorage<IAccountData>(
@@ -35,6 +37,8 @@ export function useLoginForms() {
         account: account!,
         token: data.token,
       });
+
+      navigate("/dashboard");
     },
     onError: (data: AxiosError<IAxiosErrorData>) => {
       callToast({
