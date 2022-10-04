@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ButtonHTMLAttributes, useState } from "react";
 
 import { RecyclingTypes } from "../../@types/CollectionTypes";
 import { useCollectionCreate } from "../../hooks/useCollectionCreate/index";
@@ -15,12 +15,12 @@ import {
   RecyclingType,
 } from "./styles";
 
-interface TypeProps {
+interface TypeProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   typeObject: RecyclingTypes;
   handleTypeChange: (recyclingType: RecyclingTypes) => void;
 }
 
-function Type({ typeObject, handleTypeChange }: TypeProps) {
+function Type({ typeObject, handleTypeChange, ...props }: TypeProps) {
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -29,7 +29,12 @@ function Type({ typeObject, handleTypeChange }: TypeProps) {
   };
 
   return (
-    <RecyclingType onClick={handleClick} isSelected={isSelected} type="button">
+    <RecyclingType
+      {...props}
+      onClick={handleClick}
+      isSelected={isSelected}
+      type="button"
+    >
       {typeObject.name}
     </RecyclingType>
   );
@@ -48,6 +53,7 @@ export function CreateCollectionForms() {
     handleCollectionSubmit,
     handleDescriptionChange,
     handleTypeChange,
+    isLoading,
   } = useCollectionCreate();
 
   return (
@@ -60,6 +66,7 @@ export function CreateCollectionForms() {
         <TypesContainer>
           {types.map((type) => (
             <Type
+              disabled={isLoading}
               key={type.name}
               handleTypeChange={handleTypeChange}
               typeObject={type}
@@ -72,9 +79,14 @@ export function CreateCollectionForms() {
           onChange={handleDescriptionChange}
           placeholder="Descreva brevemente sua coleta"
           maxLength={140}
+          disabled={isLoading}
           required
         />
-        <SubmitCollectionButton as={PrimaryButton} type="submit">
+        <SubmitCollectionButton
+          as={PrimaryButton}
+          type="submit"
+          disabled={isLoading}
+        >
           Solicitar coleta
         </SubmitCollectionButton>
       </Forms>

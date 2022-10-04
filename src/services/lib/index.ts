@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
+import { IApiCreateCollection } from "../../@types/APITypes";
 import {
   IInputLoginData,
   IInputRegistrationData,
 } from "../../@types/AuthTypes";
-import { CreateCollectionFormData } from "../../@types/CollectionTypes";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -34,11 +34,9 @@ export async function loginCooperative(loginData: IInputLoginData) {
   return promise.data;
 }
 
-export async function createCollection(
-  collectionData: CreateCollectionFormData,
-  config: AxiosRequestConfig
-) {
-  const promise = await api.post("/collections", collectionData, config);
-
-  return promise.data;
+export async function createCollection({
+  collectionData,
+  config,
+}: IApiCreateCollection) {
+  return api.post("/collections", collectionData, config);
 }
