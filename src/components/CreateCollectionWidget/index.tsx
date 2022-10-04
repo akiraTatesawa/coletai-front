@@ -1,3 +1,4 @@
+import { CreateCollectionForms } from "../CreateCollectionForms";
 import {
   AddIcon,
   PopoverButton,
@@ -9,7 +10,7 @@ export function CreateCollectionWidget() {
   return (
     <WidgetContainer>
       <PopoverPanel>
-        <span>Text</span>
+        <CreateCollectionForms />
       </PopoverPanel>
 
       <PopoverButton>
