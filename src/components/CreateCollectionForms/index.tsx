@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { RecyclingTypes } from "../../@types/CollectionTypes";
+import { useCollectionCreate } from "../../hooks/useCollectionCreate/index";
 import { PrimaryButton } from "../Button";
 import {
   XIcon,
@@ -14,25 +16,39 @@ import {
 } from "./styles";
 
 interface TypeProps {
-  name: string;
+  typeObject: RecyclingTypes;
+  handleTypeChange: (recyclingType: RecyclingTypes) => void;
 }
 
-function Type({ name }: TypeProps) {
+function Type({ typeObject, handleTypeChange }: TypeProps) {
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
+  const handleClick = () => {
+    setIsSelected(!isSelected);
+    handleTypeChange(typeObject);
+  };
+
   return (
-    <RecyclingType
-      onClick={() => setIsSelected(!isSelected)}
-      isSelected={isSelected}
-      type="button"
-    >
-      {name}
+    <RecyclingType onClick={handleClick} isSelected={isSelected} type="button">
+      {typeObject.name}
     </RecyclingType>
   );
 }
 
 export function CreateCollectionForms() {
-  const types: string[] = ["Plástico", "Metal", "Papel", "Vidro"];
+  const types: RecyclingTypes[] = [
+    { name: "Plástico" },
+    { name: "Metal" },
+    { name: "Papel" },
+    { name: "Vidro" },
+  ];
+
+  const {
+    formData,
+    handleCollectionSubmit,
+    handleDescriptionChange,
+    handleTypeChange,
+  } = useCollectionCreate();
 
   return (
     <FormsContainer>
@@ -40,14 +56,20 @@ export function CreateCollectionForms() {
       <CloseButton>
         <XIcon weight="bold" />
       </CloseButton>
-      <Forms>
+      <Forms onSubmit={handleCollectionSubmit}>
         <TypesContainer>
           {types.map((type) => (
-            <Type name={type} />
+            <Type
+              key={type.name}
+              handleTypeChange={handleTypeChange}
+              typeObject={type}
+            />
           ))}
         </TypesContainer>
         <DescriptionTextarea
           name="description"
+          value={formData.description}
+          onChange={handleDescriptionChange}
           placeholder="Descreva brevemente sua coleta"
           maxLength={140}
           required
