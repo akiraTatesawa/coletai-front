@@ -11,12 +11,12 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     setAccount(null);
   };
 
-  const createAccount = (account: Account) => {
+  const updateAccount = (account: Account) => {
     setAccount(account);
   };
 
   return (
-    <AccountContext.Provider value={{ account, deleteAccount, createAccount }}>
+    <AccountContext.Provider value={{ account, deleteAccount, updateAccount }}>
       {children}
     </AccountContext.Provider>
   );
