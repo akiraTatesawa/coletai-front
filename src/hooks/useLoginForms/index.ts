@@ -2,10 +2,13 @@ import { AxiosResponse, AxiosError } from "axios";
 import React from "react";
 import { useMutation } from "react-query";
 
+import { IAccountData, IAccountContext } from "../../@types/AccountTypes";
 import { IAxiosErrorData } from "../../@types/APITypes";
 import { IInputLoginData } from "../../@types/AuthTypes";
+import { AccountContext } from "../../contexts/AccountContext";
 import { loginCooperative, loginUser } from "../../services/lib";
 import { queryClient } from "../../services/queryClient/queryClient";
+import { useLocalStorage } from "../useLocalStorage/index";
 import { useToast } from "../useToast/index";
 
 type LoginData = Partial<IInputLoginData>;
@@ -13,15 +16,25 @@ type LoginData = Partial<IInputLoginData>;
 type LoginService = (loginData: IInputLoginData) => Promise<AxiosResponse>;
 
 export function useLoginForms() {
-  const { callToast } = useToast();
+  const { account } = React.useContext(AccountContext) as IAccountContext;
   const [loginData, setLoginData] = React.useState<LoginData | null>(null);
   const [loginService, setLoginService] = React.useState<LoginService>(
     () => loginUser
   );
 
+  const { callToast } = useToast();
+  const [accountData, setAccountData] = useLocalStorage<IAccountData>(
+    "coletaiAccountData",
+    { token: "", account: "user" }
+  );
+
   const mutation = useMutation(loginService, {
-    onSuccess: (response) => {
-      localStorage.setItem("coletaiToken", JSON.stringify(response));
+    onSuccess: ({ data }) => {
+      setAccountData({
+        ...accountData,
+        account: account!,
+        token: data.token,
+      });
     },
     onError: (data: AxiosError<IAxiosErrorData>) => {
       callToast({

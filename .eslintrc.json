@@ -27,6 +27,7 @@
     ],
     "rules": {
         "react/jsx-props-no-spreading": "off",
+        "react/jsx-no-constructed-context-values": "off",
         "camelcase": "off",
         "import/no-unresolved": "error",
         "@typescript-eslint/naming-convention": [

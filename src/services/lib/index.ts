@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { IApiCreateCollection } from "../../@types/APITypes";
 import {
+  ILoginResponse,
   IInputLoginData,
   IInputRegistrationData,
 } from "../../@types/AuthTypes";
@@ -22,16 +23,16 @@ export async function createNewCooperative(data: IInputRegistrationData) {
   return promise.data;
 }
 
-export async function loginUser(loginData: IInputLoginData) {
-  const promise = await api.post("/users/sign-in", loginData);
-
-  return promise.data;
+export async function loginUser(
+  loginData: IInputLoginData
+): Promise<AxiosResponse<ILoginResponse>> {
+  return api.post("/users/sign-in", loginData);
 }
 
-export async function loginCooperative(loginData: IInputLoginData) {
-  const promise = await api.post("/cooperatives/sign-in", loginData);
-
-  return promise.data;
+export async function loginCooperative(
+  loginData: IInputLoginData
+): Promise<AxiosResponse<ILoginResponse>> {
+  return api.post("/cooperatives/sign-in", loginData);
 }
 
 export async function createCollection({
