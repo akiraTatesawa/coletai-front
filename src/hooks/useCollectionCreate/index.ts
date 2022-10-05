@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import React from "react";
 import { useMutation } from "react-query";
 
+import { IAccountData } from "../../@types/AccountTypes";
 import { IAxiosErrorData } from "../../@types/APITypes";
 import {
   CreateCollectionFormData,
@@ -9,14 +10,18 @@ import {
 } from "../../@types/CollectionTypes";
 import { createCollection } from "../../services/lib";
 import { queryClient } from "../../services/queryClient/queryClient";
+import { useLocalStorage } from "../useLocalStorage/index";
 import { useToast } from "../useToast/index";
 
 export function useCollectionCreate() {
-  const token = JSON.parse(localStorage.getItem("coletaiToken")!);
+  const [accountData] = useLocalStorage<IAccountData | null>(
+    "coletaiAccountData",
+    null
+  );
 
   const config = {
     headers: {
-      Authorization: `Bearer ${token?.token}`,
+      Authorization: `Bearer ${accountData?.token}`,
     },
   };
 
