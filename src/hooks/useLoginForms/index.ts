@@ -3,13 +3,12 @@ import React from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { IAccountData, IAccountContext } from "../../@types/AccountTypes";
+import { IAccountContext } from "../../@types/AccountTypes";
 import { IAxiosErrorData } from "../../@types/APITypes";
 import { IInputLoginData } from "../../@types/AuthTypes";
 import { AccountContext } from "../../contexts/AccountContext";
 import { loginCooperative, loginUser } from "../../services/lib";
 import { queryClient } from "../../services/queryClient/queryClient";
-import { useLocalStorage } from "../useLocalStorage/index";
 import { useToast } from "../useToast/index";
 
 type LoginData = Partial<IInputLoginData>;
@@ -17,7 +16,7 @@ type LoginData = Partial<IInputLoginData>;
 type LoginService = (loginData: IInputLoginData) => Promise<AxiosResponse>;
 
 export function useLoginForms() {
-  const { account } = React.useContext(AccountContext) as IAccountContext;
+  const { saveAccount } = React.useContext(AccountContext) as IAccountContext;
   const [loginData, setLoginData] = React.useState<LoginData | null>(null);
   const [loginService, setLoginService] = React.useState<LoginService>(
     () => loginUser
@@ -25,18 +24,10 @@ export function useLoginForms() {
   const navigate = useNavigate();
 
   const { callToast } = useToast();
-  const [accountData, setAccountData] = useLocalStorage<IAccountData>(
-    "coletaiAccountData",
-    { token: "", account: "user" }
-  );
 
   const mutation = useMutation(loginService, {
     onSuccess: ({ data }) => {
-      setAccountData({
-        ...accountData,
-        account: account!,
-        token: data.token,
-      });
+      saveAccount(data.token);
 
       navigate("/dashboard");
     },

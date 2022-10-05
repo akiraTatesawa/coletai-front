@@ -1,8 +1,17 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
+import { useRouterRedirect } from "../../hooks/useRouterRedirect/index";
 import { Pages } from "../../pages";
 
 export function RouterNavigator() {
+  const { setCurrentPage } = useRouterRedirect();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setCurrentPage(pathname);
+  }, [pathname]);
+
   return (
     <Routes>
       <Route path="/" element={<Pages.FrontPage />} />
