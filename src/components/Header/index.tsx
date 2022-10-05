@@ -1,3 +1,8 @@
+import React from "react";
+
+import { IAccountContext } from "../../@types/AccountTypes";
+import { AccountContext } from "../../contexts/AccountContext";
+import { useLogout } from "../../hooks/useLogout/index";
 import {
   Container,
   Title,
@@ -9,17 +14,22 @@ import {
 } from "./styles";
 
 export function Header() {
+  const { handleLogout } = useLogout();
+  const { accountData } = React.useContext(AccountContext) as IAccountContext;
+
   return (
     <Container>
-      <Title>
+      <Title title="Ir para página inicial" to="/">
         <RecycleIcon weight="bold" />
         <Name>Coletaí</Name>
       </Title>
-      <Logout>
-        <Button>
-          <LogoutIcon weight="bold" />
-        </Button>
-      </Logout>
+      {accountData && (
+        <Logout title="Log out">
+          <Button type="button" onClick={handleLogout}>
+            <LogoutIcon weight="bold" />
+          </Button>
+        </Logout>
+      )}
     </Container>
   );
 }

@@ -1,10 +1,11 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { IAccountData } from "../../@types/AccountTypes";
+import { IAccountContext } from "../../@types/AccountTypes";
 import { PrimaryButton } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { HomepageImage } from "../../components/HomepageImage/index";
-import { useLocalStorage } from "../../hooks/useLocalStorage/index";
+import { AccountContext } from "../../contexts/AccountContext";
 import {
   Main,
   Content,
@@ -16,10 +17,7 @@ import {
 
 export function FrontPage() {
   const navigate = useNavigate();
-  const [accountData] = useLocalStorage<IAccountData | null>(
-    "coletaiAccountData",
-    null
-  );
+  const { accountData } = useContext(AccountContext) as IAccountContext;
 
   const frontPageButtons = !accountData ? (
     <>

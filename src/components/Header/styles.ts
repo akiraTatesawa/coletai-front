@@ -1,4 +1,5 @@
 import { Recycle, SignOut } from "phosphor-react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.header`
@@ -7,13 +8,21 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  *:focus {
+    outline-color: var(--brand-outline);
+  }
 `;
 
-export const Title = styled.div`
+export const Title = styled(Link)`
   display: flex;
   align-items: center;
 
+  text-decoration: none;
+
   gap: 0.625rem;
+
+  height: 100%;
 `;
 
 export const RecycleIcon = styled(Recycle)`
@@ -44,10 +53,6 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &:focus {
-    outline-color: var(--brand-outline);
-  }
 `;
 
 export const LogoutIcon = styled(SignOut)`
