@@ -41,6 +41,7 @@ export const GlobalStyles = createGlobalStyle`
 
         --brand-outline: #39AE6D;
         --info-outline: #1162D1;
+        --danger-error: #DB282C
     }
 
     #root {
