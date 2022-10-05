@@ -2,8 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { IAccountData } from "../../@types/AccountTypes";
 import { PrimaryButton } from "../../components/Button";
+import { Header } from "../../components/Header";
 import { HomepageImage } from "../../components/HomepageImage/index";
-import { Title } from "../../components/Title";
 import { useLocalStorage } from "../../hooks/useLocalStorage/index";
 import {
   Main,
@@ -38,7 +38,7 @@ export function FrontPage() {
 
   return (
     <Main>
-      <Title />
+      <Header />
       <Content>
         <HomepageImage />
 

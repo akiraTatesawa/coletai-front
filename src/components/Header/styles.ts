@@ -1,9 +1,17 @@
 import { Recycle } from "phosphor-react";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.header`
+  width: 100%;
+
   display: flex;
   align-items: center;
+`;
+
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+
   gap: 0.625rem;
 
   @media (min-width: 1025px) {
@@ -20,7 +28,7 @@ export const Icon = styled(Recycle)`
   }
 `;
 
-export const Name = styled.div`
+export const Name = styled.h1`
   font-size: 2rem;
   color: var(--text-primary);
   font-weight: 500;
