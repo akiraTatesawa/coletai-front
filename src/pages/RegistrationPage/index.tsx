@@ -1,5 +1,5 @@
+import { Header } from "../../components/Header";
 import { SignUpForms } from "../../components/SignUpForms";
-import { Title } from "../../components/Title";
 import { Main, RegistrationContainer, RegistrationTitle } from "./styles";
 
 interface RegistrationPageProps {
@@ -27,7 +27,7 @@ export function RegistrationPage({ registrationType }: RegistrationPageProps) {
 
   return (
     <Main>
-      <Title />
+      <Header />
       <RegistrationContainer>
         <RegistrationTitle>
           {`Cadastrar ${registrationPageType[registrationType].title}`}
