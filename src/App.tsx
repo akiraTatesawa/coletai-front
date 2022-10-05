@@ -1,4 +1,5 @@
 import "./styles/reset.css";
+import "./styles/tailwind.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter } from "react-router-dom";
