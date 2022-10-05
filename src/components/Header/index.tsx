@@ -2,7 +2,7 @@ import React from "react";
 
 import { IAccountContext } from "../../@types/AccountTypes";
 import { AccountContext } from "../../contexts/AccountContext";
-import { useLogout } from "../../hooks/useLogout/index";
+import { LogoutDialog } from "../LogoutDialog";
 import {
   Container,
   Title,
@@ -14,8 +14,8 @@ import {
 } from "./styles";
 
 export function Header() {
-  const { handleLogout } = useLogout();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   return (
     <Container>
@@ -25,11 +25,12 @@ export function Header() {
       </Title>
       {accountData && (
         <Logout title="Log out">
-          <Button type="button" onClick={handleLogout}>
+          <Button type="button" onClick={() => setIsOpen(true)}>
             <LogoutIcon weight="bold" />
           </Button>
         </Logout>
       )}
+      <LogoutDialog isOpen={isOpen} setIsOpen={setIsOpen} />
     </Container>
   );
 }
