@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
 import { IApiCreateCollection } from "../../@types/APITypes";
 import {
@@ -40,4 +40,12 @@ export async function createCollection({
   config,
 }: IApiCreateCollection) {
   return api.post("/collections", collectionData, config);
+}
+
+export async function getCooperativeCollections(config: AxiosRequestConfig) {
+  return api.get("/collections/cooperative", config);
+}
+
+export async function getUserCollections(config: AxiosRequestConfig) {
+  return api.get("/collections/user", config);
 }

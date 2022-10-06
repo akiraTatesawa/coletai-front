@@ -1,7 +1,14 @@
-import { ButtonHTMLAttributes, useState } from "react";
+import { AxiosResponse } from "axios";
+import { ButtonHTMLAttributes, useState, useEffect } from "react";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 
-import { RecyclingTypes } from "../../@types/CollectionTypes";
+import { RecyclingTypes, CollectionData } from "../../@types/CollectionTypes";
 import { useCollectionCreate } from "../../hooks/useCollectionCreate/index";
+import { useCollectionList } from "../../hooks/useCollectionList/index";
 import { PrimaryButton } from "../Button";
 import {
   XIcon,
@@ -40,7 +47,24 @@ function Type({ typeObject, handleTypeChange, ...props }: TypeProps) {
   );
 }
 
-export function CreateCollectionForms() {
+interface CreateCollectionFormsProps {
+  close(
+    focusableElement?:
+      | HTMLElement
+      | React.MutableRefObject<HTMLElement | null>
+      | undefined
+  ): void;
+  refetchCollections: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<
+    QueryObserverResult<AxiosResponse<CollectionData[], any>, unknown>
+  >;
+}
+
+export function CreateCollectionForms({
+  close,
+  refetchCollections,
+}: CreateCollectionFormsProps) {
   const types: RecyclingTypes[] = [
     { name: "Plástico" },
     { name: "Metal" },
@@ -54,7 +78,17 @@ export function CreateCollectionForms() {
     handleDescriptionChange,
     handleTypeChange,
     isLoading,
+    isSuccess,
   } = useCollectionCreate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      close();
+      setTimeout(() => {
+        refetchCollections();
+      }, 1000);
+    }
+  }, [isSuccess]);
 
   return (
     <FormsContainer>

@@ -43,3 +43,12 @@ export const CollectionsTitle = styled.h2`
     font-size: 2rem;
   }
 `;
+
+export const Collections = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  width: 100%;
+`;

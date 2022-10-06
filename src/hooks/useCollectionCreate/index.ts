@@ -31,7 +31,7 @@ export function useCollectionCreate() {
     description: "",
   });
 
-  const { mutate, isLoading } = useMutation(createCollection, {
+  const { mutate, isLoading, isSuccess } = useMutation(createCollection, {
     onSuccess: () => {
       callToast({
         message: "Coleta criada com sucesso",
@@ -95,5 +95,6 @@ export function useCollectionCreate() {
     handleTypeChange,
     handleCollectionSubmit,
     isLoading,
+    isSuccess,
   };
 }

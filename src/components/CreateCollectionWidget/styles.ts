@@ -6,7 +6,7 @@ export const WidgetContainer = styled(Popover)`
   width: 100%;
   height: fit-content;
 
-  position: absolute;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
 
@@ -44,12 +44,4 @@ export const AddIcon = styled(Plus)`
 
   align-self: center;
   justify-self: center;
-`;
-
-export const PopoverPanel = styled(Popover.Panel)`
-  width: calc(100vw - 4rem);
-
-  @media (min-width: 600px) {
-    width: 100%;
-  }
 `;
