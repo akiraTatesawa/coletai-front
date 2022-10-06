@@ -1,16 +1,17 @@
-import { IAccountData } from "../../@types/AccountTypes";
+import React from "react";
+
+import { IAccountContext } from "../../@types/AccountTypes";
 import { Collection } from "../../components/Collection";
 import { CreateCollectionWidget } from "../../components/CreateCollectionWidget";
 import { Header } from "../../components/Header";
-import { useLocalStorage } from "../../hooks/useLocalStorage/index";
+import { AccountContext } from "../../contexts/AccountContext";
+import { useCollectionList } from "../../hooks/useCollectionList/index";
 import { Main } from "../FrontPage/styles";
 import { Collections, CollectionsContainer, CollectionsTitle } from "./styles";
 
 export function DashboardPage() {
-  const [accountData] = useLocalStorage<IAccountData | null>(
-    "coletaiAccountData",
-    null
-  );
+  const { collections, isFetching } = useCollectionList();
+  const { accountData } = React.useContext(AccountContext) as IAccountContext;
 
   return (
     <Main>
@@ -18,8 +19,11 @@ export function DashboardPage() {
       <CollectionsContainer>
         <CollectionsTitle>Suas coletas</CollectionsTitle>
         <Collections>
-          <Collection />
-          <Collection />
+          {isFetching
+            ? "Carregando..."
+            : collections?.map(({ ...data }) => (
+                <Collection key={data.id} {...data} />
+              ))}
         </Collections>
       </CollectionsContainer>
       {accountData?.account === "user" && <CreateCollectionWidget />}

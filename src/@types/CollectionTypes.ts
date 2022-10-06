@@ -9,12 +9,17 @@ export interface CreateCollectionFormData {
 
 export type CollectionStatus = "ongoing" | "cancelled" | "finished";
 
+export interface EntityData {
+  id: string;
+  name: string;
+}
+
 export interface CollectionData {
   id: string;
-  userId: string;
-  cooperativeId: string;
-  description: string;
   status: CollectionStatus;
+  description: string;
+  cooperative: EntityData;
+  user: EntityData;
   types: RecyclingTypes[];
   created_at: Date;
   updated_at: Date;

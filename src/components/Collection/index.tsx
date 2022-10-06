@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Account, IAccountContext } from "../../@types/AccountTypes";
-import { CollectionStatus } from "../../@types/CollectionTypes";
+import { CollectionStatus, CollectionData } from "../../@types/CollectionTypes";
 import { AccountContext } from "../../contexts/AccountContext";
 import {
   CollectionContainer,
@@ -64,7 +64,12 @@ function StatusContainer({ status }: CollectionStatusProps) {
   );
 }
 
-export function Collection() {
+export function Collection({
+  cooperative,
+  description,
+  status,
+  user,
+}: CollectionData) {
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
   const types = ["Plástico", "Vidro", "Metal", "Papel"];
 
@@ -73,18 +78,17 @@ export function Collection() {
       <CollectionHeader>
         <NameContainer>
           <AccountIcon accountType={accountData?.account || "user"} />
-          <Name>USERNAME HERE</Name>
+          <Name>
+            {accountData?.account === "user" ? cooperative.name : user.name}
+          </Name>
         </NameContainer>
-        <StatusContainer status="ongoing" />
+        <StatusContainer status={status} />
       </CollectionHeader>
       <Types>
         {`tipos de materiais: `}
         <TypeText>{types.join(", ")}</TypeText>
       </Types>
-      <Description>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta in
-        turpis et varius. Nullam dui turpis, euismod ac ornare.
-      </Description>
+      <Description>{description}</Description>
       <Options>
         <CancelButton type="button">Cancelar</CancelButton>
         <FinishButton type="button">Finalizar</FinishButton>
