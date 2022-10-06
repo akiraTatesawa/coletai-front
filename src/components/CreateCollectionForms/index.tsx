@@ -1,14 +1,11 @@
-import { AxiosResponse } from "axios";
-import { ButtonHTMLAttributes, useState, useEffect } from "react";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from "react-query";
+import { ButtonHTMLAttributes, useState, useEffect, useContext } from "react";
 
-import { RecyclingTypes, CollectionData } from "../../@types/CollectionTypes";
+import {
+  RecyclingTypes,
+  ICollectionContext,
+} from "../../@types/CollectionTypes";
+import { CollectionContext } from "../../contexts/CollectionsContext";
 import { useCollectionCreate } from "../../hooks/useCollectionCreate/index";
-import { useCollectionList } from "../../hooks/useCollectionList/index";
 import { PrimaryButton } from "../Button";
 import {
   XIcon,
@@ -54,17 +51,9 @@ interface CreateCollectionFormsProps {
       | React.MutableRefObject<HTMLElement | null>
       | undefined
   ): void;
-  refetchCollections: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<
-    QueryObserverResult<AxiosResponse<CollectionData[], any>, unknown>
-  >;
 }
 
-export function CreateCollectionForms({
-  close,
-  refetchCollections,
-}: CreateCollectionFormsProps) {
+export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
   const types: RecyclingTypes[] = [
     { name: "Plástico" },
     { name: "Metal" },
@@ -80,6 +69,10 @@ export function CreateCollectionForms({
     isLoading,
     isSuccess,
   } = useCollectionCreate();
+
+  const { refetchCollections } = useContext(
+    CollectionContext
+  ) as ICollectionContext;
 
   useEffect(() => {
     if (isSuccess) {

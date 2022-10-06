@@ -1,3 +1,10 @@
+import { AxiosResponse } from "axios";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
+
 export interface RecyclingTypes {
   name: string;
 }
@@ -23,4 +30,12 @@ export interface CollectionData {
   types: RecyclingTypes[];
   created_at: Date;
   updated_at: Date;
+}
+
+export interface ICollectionContext {
+  refetchCollections: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<
+    QueryObserverResult<AxiosResponse<CollectionData[], any>, unknown>
+  >;
 }
