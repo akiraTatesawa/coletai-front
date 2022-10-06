@@ -1,0 +1,94 @@
+import React from "react";
+
+import { Account, IAccountContext } from "../../@types/AccountTypes";
+import { CollectionStatus } from "../../@types/CollectionTypes";
+import { AccountContext } from "../../contexts/AccountContext";
+import {
+  CollectionContainer,
+  CollectionHeader,
+  Name,
+  Status,
+  Types,
+  Description,
+  NameContainer,
+  CooperativeIcon,
+  UserIcon,
+  OngoingIcon,
+  CancelledIcon,
+  FinishedIcon,
+  StatusTitle,
+  TypeText,
+  Options,
+  CancelButton,
+  FinishButton,
+} from "./styles";
+
+interface AccountIconProps {
+  accountType: Account;
+}
+
+interface CollectionStatusProps {
+  status: CollectionStatus;
+}
+
+// The accountType props comes from the context/localStorage
+function AccountIcon({ accountType }: AccountIconProps) {
+  const icon = accountType === "user" ? <CooperativeIcon /> : <UserIcon />;
+
+  return icon;
+}
+
+function StatusContainer({ status }: CollectionStatusProps) {
+  let icon: JSX.Element = <OngoingIcon weight="fill" />;
+  let title = "coleta solicitada";
+
+  function setStatusData(status: CollectionStatus) {
+    if (status === "cancelled") {
+      icon = <CancelledIcon weight="fill" />;
+      title = "coleta cancelada";
+      return;
+    }
+    if (status === "finished") {
+      icon = <FinishedIcon weight="fill" />;
+      title = "coleta finalizada";
+    }
+  }
+
+  setStatusData(status);
+
+  return (
+    <Status>
+      {icon}
+      <StatusTitle>{title}</StatusTitle>
+    </Status>
+  );
+}
+
+export function Collection() {
+  const { accountData } = React.useContext(AccountContext) as IAccountContext;
+  const types = ["Plástico", "Vidro", "Metal", "Papel"];
+
+  return (
+    <CollectionContainer>
+      <CollectionHeader>
+        <NameContainer>
+          <AccountIcon accountType={accountData?.account || "user"} />
+          <Name>USERNAME HERE</Name>
+        </NameContainer>
+        <StatusContainer status="ongoing" />
+      </CollectionHeader>
+      <Types>
+        {`tipos de materiais: `}
+        <TypeText>{types.join(", ")}</TypeText>
+      </Types>
+      <Description>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta in
+        turpis et varius. Nullam dui turpis, euismod ac ornare.
+      </Description>
+      <Options>
+        <CancelButton type="button">Cancelar</CancelButton>
+        <FinishButton type="button">Finalizar</FinishButton>
+      </Options>
+    </CollectionContainer>
+  );
+}
