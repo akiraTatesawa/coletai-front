@@ -46,16 +46,16 @@ export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-center align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-xs md:max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-center align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-xl font-medium leading-6 text-brand-text-primary"
+                  className="text-xl md:text-2xl font-medium leading-6 text-brand-text-primary"
                 >
                   Log out
                 </Dialog.Title>
 
                 <div className="mt-2">
-                  <p className="text-sm text-brand-text-secondary">
+                  <p className="text-sm md:text-lg text-brand-text-secondary">
                     Deseja realmente sair da plataforma?
                   </p>
                 </div>
@@ -63,14 +63,14 @@ export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
                 <div className="mt-4 flex items-center justify-center gap-6">
                   <button
                     type="button"
-                    className="rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm font-medium text-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+                    className="rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm md:text-base font-medium text-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                     onClick={() => setIsOpen(false)}
                   >
                     Não, ficar
                   </button>
                   <button
                     type="button"
-                    className="rounded-md border border-transparent bg-error-100 px-4 py-2 text-sm font-medium text-error-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-error-400 focus-visible:ring-offset-2"
+                    className="rounded-md border border-transparent bg-error-100 px-4 py-2 text-sm md:text-base font-medium text-error-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-error-400 focus-visible:ring-offset-2"
                     onClick={handleLogoutClick}
                   >
                     Sim, sair
