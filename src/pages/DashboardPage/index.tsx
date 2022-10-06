@@ -10,7 +10,7 @@ import { Main } from "../FrontPage/styles";
 import { Collections, CollectionsContainer, CollectionsTitle } from "./styles";
 
 export function DashboardPage() {
-  const { collections, isFetching, refetch } = useCollectionList();
+  const { collections, isFetching } = useCollectionList();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
 
   return (
@@ -19,16 +19,13 @@ export function DashboardPage() {
       <CollectionsContainer>
         <CollectionsTitle>Suas coletas</CollectionsTitle>
         <Collections>
-          {isFetching
-            ? "Carregando..."
-            : collections?.map(({ ...data }) => (
-                <Collection key={data.id} {...data} />
-              ))}
+          {!isFetching &&
+            collections?.map(({ ...data }) => (
+              <Collection key={data.id} {...data} />
+            ))}
         </Collections>
       </CollectionsContainer>
-      {accountData?.account === "user" && (
-        <CreateCollectionWidget refetchCollections={refetch} />
-      )}
+      {accountData?.account === "user" && <CreateCollectionWidget />}
     </Main>
   );
 }
