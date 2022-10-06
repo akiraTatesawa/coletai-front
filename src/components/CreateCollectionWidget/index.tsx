@@ -1,14 +1,26 @@
-import { Transition } from "@headlessui/react";
-
-import { CreateCollectionForms } from "../CreateCollectionForms";
+import { Transition, Popover } from "@headlessui/react";
+import { AxiosResponse } from "axios";
 import {
-  AddIcon,
-  PopoverButton,
-  PopoverPanel,
-  WidgetContainer,
-} from "./styles";
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 
-export function CreateCollectionWidget() {
+import { CollectionData } from "../../@types/CollectionTypes";
+import { CreateCollectionForms } from "../CreateCollectionForms";
+import { AddIcon, PopoverButton, WidgetContainer } from "./styles";
+
+interface CreateCollectionWidgetProps {
+  refetchCollections: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<
+    QueryObserverResult<AxiosResponse<CollectionData[], any>, unknown>
+  >;
+}
+
+export function CreateCollectionWidget({
+  refetchCollections,
+}: CreateCollectionWidgetProps) {
   return (
     <WidgetContainer>
       <Transition
@@ -19,9 +31,14 @@ export function CreateCollectionWidget() {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform scale-95 opacity-0"
       >
-        <PopoverPanel>
-          <CreateCollectionForms />
-        </PopoverPanel>
+        <Popover.Panel className="w-[calc(100vw-4rem)] md:w-auto">
+          {({ close }) => (
+            <CreateCollectionForms
+              close={close}
+              refetchCollections={refetchCollections}
+            />
+          )}
+        </Popover.Panel>
       </Transition>
 
       <PopoverButton>

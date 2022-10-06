@@ -10,7 +10,7 @@ import { Main } from "../FrontPage/styles";
 import { Collections, CollectionsContainer, CollectionsTitle } from "./styles";
 
 export function DashboardPage() {
-  const { collections, isFetching } = useCollectionList();
+  const { collections, isFetching, refetch } = useCollectionList();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
 
   return (
@@ -26,7 +26,9 @@ export function DashboardPage() {
               ))}
         </Collections>
       </CollectionsContainer>
-      {accountData?.account === "user" && <CreateCollectionWidget />}
+      {accountData?.account === "user" && (
+        <CreateCollectionWidget refetchCollections={refetch} />
+      )}
     </Main>
   );
 }

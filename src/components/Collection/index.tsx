@@ -90,8 +90,12 @@ export function Collection({
       </Types>
       <Description>{description}</Description>
       <Options>
-        <CancelButton type="button">Cancelar</CancelButton>
-        <FinishButton type="button">Finalizar</FinishButton>
+        {accountData?.account === "cooperative" && (
+          <>
+            <CancelButton type="button">Cancelar</CancelButton>
+            <FinishButton type="button">Finalizar</FinishButton>
+          </>
+        )}
       </Options>
     </CollectionContainer>
   );

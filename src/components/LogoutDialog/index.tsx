@@ -11,6 +11,11 @@ interface LogoutDialogProps {
 export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
   const { handleLogout } = useLogout();
 
+  const handleLogoutClick = () => {
+    setIsOpen(false);
+    handleLogout();
+  };
+
   return (
     <Transition appear show={isOpen} as={React.Fragment}>
       <Dialog
@@ -66,7 +71,7 @@ export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
                   <button
                     type="button"
                     className="rounded-md border border-transparent bg-error-100 px-4 py-2 text-sm font-medium text-error-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-error-400 focus-visible:ring-offset-2"
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                   >
                     Sim, sair
                   </button>
