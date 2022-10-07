@@ -13,30 +13,32 @@ export function useCollectionCancel() {
   const { refetch } = useCollectionList(false);
   const { callToast } = useToast();
 
-  const { mutate, isLoading: isCancelling } = useMutation(cancelCollection, {
-    onSuccess: () => {
-      callToast({
-        message: "Coleta cancelada",
-        toastType: "success",
-        id: 35,
-      });
-      setTimeout(() => {
-        refetch();
-      }, 1000);
-    },
-    onError: ({ response }: AxiosError<IAxiosErrorData>) => {
-      callToast({
-        message: response?.data.message,
-        id: 30,
-        toastType: "error",
-      });
-    },
-    onSettled: () => queryClient.invalidateQueries("cancel"),
-  });
+  const { mutateAsync, isLoading: isCancelling } = useMutation(
+    cancelCollection,
+    {
+      onSuccess: () => {
+        callToast({
+          message: "Coleta cancelada",
+          toastType: "success",
+          id: 35,
+        });
+        setTimeout(() => {
+          refetch();
+        }, 1000);
+      },
+      onError: ({ response }: AxiosError<IAxiosErrorData>) => {
+        callToast({
+          message: response?.data.message,
+          id: 30,
+          toastType: "error",
+        });
+      },
+      onSettled: () => queryClient.invalidateQueries("cancel"),
+    }
+  );
 
-  const handleCancellation = (id: string) => {
-    console.log(config);
-    mutate({ config, id });
+  const handleCancellation = async (id: string) => {
+    await mutateAsync({ config, id });
   };
 
   return { handleCancellation, isCancelling };
