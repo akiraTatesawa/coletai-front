@@ -69,9 +69,10 @@ export function Collection({
   description,
   status,
   user,
+  types,
 }: CollectionData) {
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
-  const types = ["Plástico", "Vidro", "Metal", "Papel"];
+  const typesFormatted = types.map(({ name }) => name);
 
   return (
     <CollectionContainer>
@@ -86,7 +87,7 @@ export function Collection({
       </CollectionHeader>
       <Types>
         {`tipos de materiais: `}
-        <TypeText>{types.join(", ")}</TypeText>
+        <TypeText>{typesFormatted.join(", ")}</TypeText>
       </Types>
       <Description>{description}</Description>
       <Options>
