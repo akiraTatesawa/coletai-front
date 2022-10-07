@@ -28,7 +28,7 @@ export interface CollectionData {
   description: string;
   cooperative: EntityData;
   user: EntityData;
-  types: RecyclingTypes[];
+  types: { name: string }[];
   created_at: Date;
   updated_at: Date;
 }
