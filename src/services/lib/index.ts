@@ -53,3 +53,7 @@ export async function getUserCollections(config: AxiosRequestConfig) {
 export async function cancelCollection({ config, id }: IApiPatchData) {
   return api.patch(`/collections/${id}/cancel`, {}, config);
 }
+
+export async function finishCollection({ config, id }: IApiPatchData) {
+  return api.patch(`/collections/${id}/finish`, {}, config);
+}
