@@ -12,7 +12,7 @@ export function CollectionProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { refetch } = useCollectionList();
+  const { refetch } = useCollectionList(false);
   const collectionRef = React.useRef<HTMLElement | null>(null);
 
   const scrollToCollection = () => {
