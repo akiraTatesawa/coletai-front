@@ -11,7 +11,7 @@ import {
 } from "../../services/lib";
 import { useToast } from "../useToast/index";
 
-export function useCollectionList() {
+export function useCollectionList(enabled = true) {
   const { callToast } = useToast();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
   const [collections, setCollections] = React.useState<CollectionData[] | null>(
@@ -43,6 +43,7 @@ export function useCollectionList() {
           id: 25,
         });
       },
+      enabled: enabled && !!accountData,
     }
   );
 
