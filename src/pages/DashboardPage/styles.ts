@@ -27,7 +27,10 @@ export const CollectionsContainer = styled.section`
 
   width: 100%;
   max-width: 700px;
-  min-height: fit-content;
+  /* min-height: fit-content; */
+  max-height: 70vh;
+
+  overflow: scroll;
 
   border-radius: 10px;
 

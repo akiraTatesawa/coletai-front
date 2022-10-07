@@ -32,9 +32,16 @@ export const PopoverButton = styled(Popover.Button)`
   border: none;
   border-radius: 1.5rem;
 
+  transition: background-color 500ms ease-in-out;
+
   &:focus {
     outline-color: var(--brand-stroke);
     outline-offset: 2px;
+  }
+
+  &:hover {
+    background-color: var(--brand-hover);
+    transition: background-color 500ms ease-in-out;
   }
 `;
 
