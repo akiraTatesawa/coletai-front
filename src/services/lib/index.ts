@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
-import { IApiCreateCollection } from "../../@types/APITypes";
+import { IApiCreateCollection, IApiPatchData } from "../../@types/APITypes";
 import {
   ILoginResponse,
   IInputLoginData,
@@ -48,4 +48,8 @@ export async function getCooperativeCollections(config: AxiosRequestConfig) {
 
 export async function getUserCollections(config: AxiosRequestConfig) {
   return api.get("/collections/user", config);
+}
+
+export async function cancelCollection({ config, id }: IApiPatchData) {
+  return api.patch(`/collections/${id}/cancel`, {}, config);
 }

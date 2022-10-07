@@ -130,6 +130,10 @@ export const CancelButton = styled.button`
     outline-color: #e9635a;
     outline-offset: 2px;
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 export const FinishButton = styled.button`
@@ -141,5 +145,9 @@ export const FinishButton = styled.button`
   &:focus {
     outline-color: var(--brand);
     outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 `;
