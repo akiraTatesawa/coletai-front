@@ -3,6 +3,7 @@ import React from "react";
 import { Account, IAccountContext } from "../../@types/AccountTypes";
 import { CollectionStatus, CollectionData } from "../../@types/CollectionTypes";
 import { AccountContext } from "../../contexts/AccountContext";
+import { useCollectionFinish } from "../../hooks/useCollectionFinish/index";
 import { CancelDialog } from "../CancelDialog";
 import {
   CollectionContainer,
@@ -73,6 +74,7 @@ export function Collection({
   types,
   id,
 }: CollectionData) {
+  const { handleFinishCollection, isFinishing } = useCollectionFinish();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
   const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false);
   const typesFormatted = types.map(({ name }) => name);
@@ -96,10 +98,20 @@ export function Collection({
       <Options>
         {accountData?.account === "cooperative" && status === "ongoing" && (
           <>
-            <CancelButton type="button" onClick={() => setIsDialogOpen(true)}>
+            <CancelButton
+              type="button"
+              onClick={() => setIsDialogOpen(true)}
+              disabled={isFinishing}
+            >
               Cancelar
             </CancelButton>
-            <FinishButton type="button">Finalizar</FinishButton>
+            <FinishButton
+              type="button"
+              onClick={() => handleFinishCollection(id)}
+              disabled={isFinishing}
+            >
+              Finalizar
+            </FinishButton>
           </>
         )}
       </Options>
