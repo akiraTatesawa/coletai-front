@@ -70,7 +70,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
     isSuccess,
   } = useCollectionCreate();
 
-  const { refetchCollections } = useContext(
+  const { refetchCollections, scrollToCollection } = useContext(
     CollectionContext
   ) as ICollectionContext;
 
@@ -79,6 +79,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
       close();
       setTimeout(() => {
         refetchCollections();
+        scrollToCollection();
       }, 1000);
     }
   }, [isSuccess]);

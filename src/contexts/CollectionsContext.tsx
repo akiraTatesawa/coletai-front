@@ -13,9 +13,18 @@ export function CollectionProvider({
   children: React.ReactNode;
 }) {
   const { refetch } = useCollectionList();
+  const collectionRef = React.useRef<HTMLElement | null>(null);
+
+  const scrollToCollection = () => {
+    collectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <CollectionContext.Provider value={{ refetchCollections: refetch }}>
+    <CollectionContext.Provider
+      value={{ refetchCollections: refetch, collectionRef, scrollToCollection }}
+    >
       {children}
     </CollectionContext.Provider>
   );

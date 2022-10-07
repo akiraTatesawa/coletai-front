@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import React from "react";
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -38,4 +39,6 @@ export interface ICollectionContext {
   ) => Promise<
     QueryObserverResult<AxiosResponse<CollectionData[], any>, unknown>
   >;
+  collectionRef: React.MutableRefObject<null | HTMLElement>;
+  scrollToCollection(): void;
 }
