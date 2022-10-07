@@ -3,6 +3,7 @@ import React from "react";
 import { Account, IAccountContext } from "../../@types/AccountTypes";
 import { CollectionStatus, CollectionData } from "../../@types/CollectionTypes";
 import { AccountContext } from "../../contexts/AccountContext";
+import { CancelDialog } from "../CancelDialog";
 import {
   CollectionContainer,
   CollectionHeader,
@@ -70,8 +71,10 @@ export function Collection({
   status,
   user,
   types,
+  id,
 }: CollectionData) {
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
+  const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false);
   const typesFormatted = types.map(({ name }) => name);
 
   return (
@@ -91,13 +94,20 @@ export function Collection({
       </Types>
       <Description>{description}</Description>
       <Options>
-        {accountData?.account === "cooperative" && (
+        {accountData?.account === "cooperative" && status === "ongoing" && (
           <>
-            <CancelButton type="button">Cancelar</CancelButton>
+            <CancelButton type="button" onClick={() => setIsDialogOpen(true)}>
+              Cancelar
+            </CancelButton>
             <FinishButton type="button">Finalizar</FinishButton>
           </>
         )}
       </Options>
+      <CancelDialog
+        isOpen={isDialogOpen}
+        setIsOpen={setIsDialogOpen}
+        collectionId={id}
+      />
     </CollectionContainer>
   );
 }
