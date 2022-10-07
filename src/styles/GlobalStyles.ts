@@ -22,6 +22,10 @@ export const GlobalStyles = createGlobalStyle`
 
     button {
         cursor: pointer;
+
+        &:disabled {
+            cursor: default;
+        }
     }
 
     :root {
