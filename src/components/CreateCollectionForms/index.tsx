@@ -85,7 +85,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
   }, [isSuccess]);
 
   return (
-    <FormsContainer>
+    <FormsContainer data-cy="collection-forms">
       <FormsTitle>Criar coleta</FormsTitle>
       <CloseButton>
         <XIcon weight="bold" />

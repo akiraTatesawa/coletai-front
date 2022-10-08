@@ -25,7 +25,11 @@ export function Header() {
       </Title>
       {accountData && (
         <Logout title="Log out">
-          <Button type="button" onClick={() => setIsOpen(true)}>
+          <Button
+            data-cy="logout"
+            type="button"
+            onClick={() => setIsOpen(true)}
+          >
             <LogoutIcon weight="bold" />
           </Button>
         </Logout>

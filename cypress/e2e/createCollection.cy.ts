@@ -6,7 +6,7 @@ describe("Create a collection", () => {
     cy.createAccount("cooperatives");
   });
 
-  it("Should be able to create a recommendation", () => {
+  it("Should be able to create a collection", () => {
     cy.createAccount("users").then(({ email, password }) => {
       cy.loginAccount({ email, password }, "users").then(() => {
         const description = randText();
@@ -52,6 +52,21 @@ describe("Create a collection", () => {
           "contain",
           "Selecione pelo menos 1 tipo de reciclagem"
         );
+      });
+    });
+  });
+
+  it("Should be able to exit the collection forms", () => {
+    cy.createAccount("users").then(({ email, password }) => {
+      cy.loginAccount({ email, password }, "users").then(() => {
+        cy.visit("http://localhost:5173/dashboard");
+
+        cy.get("[data-cy='create-collection-icon']").click();
+        cy.get("[data-cy='Metal-type']").click();
+
+        cy.get("[data-cy='create-collection-icon']").click();
+
+        cy.get("[data-cy='collection-forms']").should("not.exist");
       });
     });
   });

@@ -62,6 +62,7 @@ export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
 
                 <div className="mt-4 flex items-center justify-center gap-6">
                   <button
+                    data-cy="logout-cancel"
                     type="button"
                     className="rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm md:text-base font-medium text-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                     onClick={() => setIsOpen(false)}
@@ -69,6 +70,7 @@ export function LogoutDialog({ isOpen, setIsOpen }: LogoutDialogProps) {
                     Não, ficar
                   </button>
                   <button
+                    data-cy="logout-confirm"
                     type="button"
                     className="rounded-md border border-transparent bg-error-100 px-4 py-2 text-sm md:text-base font-medium text-error-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-error-400 focus-visible:ring-offset-2"
                     onClick={handleLogoutClick}
