@@ -21,7 +21,7 @@ export function CreateCollectionWidget() {
       </Transition>
 
       <PopoverButton>
-        <AddIcon />
+        <AddIcon data-cy="create-collection-icon" />
       </PopoverButton>
     </WidgetContainer>
   );

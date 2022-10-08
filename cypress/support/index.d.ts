@@ -8,9 +8,20 @@ declare namespace Cypress {
   }
 
   type CreateAccount = Omit<Account, "latitude" | "longitude">;
+  type LoginAccount = Pick<Account, "email" | "password">;
+
+  type AccountType = "users" | "cooperatives";
+
+  interface Token {
+    token: string;
+  }
 
   interface Chainable<Subject = any> {
     resetDatabase(data: void): Chainable<void>;
-    createAccount(accountType: "users" | "cooperatives"): Chainable<Account>;
+    createAccount(accountType: AccountType): Chainable<Account>;
+    loginAccount(
+      loginData: LoginAccount,
+      accountType: AccountType
+    ): Chainable<Token>;
   }
 }

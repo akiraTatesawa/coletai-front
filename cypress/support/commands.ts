@@ -38,7 +38,7 @@ Cypress.Commands.add("resetDatabase", () => {
 });
 
 Cypress.Commands.add("createAccount", (accountType) => {
-  const user = {
+  const account = {
     name: randUserName(),
     email: randEmail(),
     password: randPassword(),
@@ -49,7 +49,22 @@ Cypress.Commands.add("createAccount", (accountType) => {
   cy.request({
     method: "POST",
     url: `http://localhost:4000/${accountType}`,
-    body: user,
+    body: account,
     failOnStatusCode: false,
-  }).then(() => cy.wrap(user));
+  }).then(() => cy.wrap(account));
+});
+
+Cypress.Commands.add("loginAccount", (accountData, accountType) => {
+  cy.request({
+    method: "POST",
+    url: `http://localhost:4000/${accountType}/sign-in`,
+    body: accountData,
+    failOnStatusCode: false,
+  }).then(({ body }) => {
+    const account = accountType === "users" ? "user" : "cooperative";
+    localStorage.setItem(
+      "coletaiAccountData",
+      JSON.stringify({ token: body.token, account })
+    );
+  });
 });

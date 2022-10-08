@@ -35,7 +35,10 @@ export function FrontPage() {
       </PrimaryButton>
     </>
   ) : (
-    <PrimaryButton handleClick={() => navigate("/dashboard")}>
+    <PrimaryButton
+      data-cy="dashboard"
+      handleClick={() => navigate("/dashboard")}
+    >
       Ir para dashboard
     </PrimaryButton>
   );
@@ -59,7 +62,7 @@ export function FrontPage() {
 
           {!accountData && (
             <Redirect>
-              Já possui cadastro?
+              Já possui cadastro?{" "}
               <Link data-cy="anchor-login" to="/sign-in">
                 Login
               </Link>
