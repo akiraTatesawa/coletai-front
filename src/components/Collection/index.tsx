@@ -99,6 +99,7 @@ export function Collection({
         {accountData?.account === "cooperative" && status === "ongoing" && (
           <>
             <CancelButton
+              data-cy="button-cancel-collection"
               type="button"
               onClick={() => setIsDialogOpen(true)}
               disabled={isFinishing}
@@ -106,6 +107,7 @@ export function Collection({
               Cancelar
             </CancelButton>
             <FinishButton
+              data-cy="button-finish-collection"
               type="button"
               onClick={() => handleFinishCollection(id)}
               disabled={isFinishing}

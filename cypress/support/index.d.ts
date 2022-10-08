@@ -23,5 +23,6 @@ declare namespace Cypress {
       loginData: LoginAccount,
       accountType: AccountType
     ): Chainable<Token>;
+    createCollection(): Chainable<LoginAccount>;
   }
 }

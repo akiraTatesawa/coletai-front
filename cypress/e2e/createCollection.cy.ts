@@ -27,7 +27,7 @@ describe("Create a collection", () => {
 
         cy.wait("@createCollection");
 
-        cy.get(".Toastify").contains("Coleta criada com sucesso");
+        cy.get(".Toastify").should("contain", "Coleta criada com sucesso");
       });
     });
   });
@@ -48,7 +48,8 @@ describe("Create a collection", () => {
 
         cy.wait(500);
 
-        cy.get(".Toastify").contains(
+        cy.get(".Toastify").should(
+          "contain",
           "Selecione pelo menos 1 tipo de reciclagem"
         );
       });

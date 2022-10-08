@@ -6,6 +6,7 @@ import {
   randLongitude,
   randPassword,
   randUserName,
+  randText,
 } from "@ngneat/falso";
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -67,4 +68,37 @@ Cypress.Commands.add("loginAccount", (accountData, accountType) => {
       JSON.stringify({ token: body.token, account })
     );
   });
+});
+
+Cypress.Commands.add("createCollection", () => {
+  cy.createAccount("cooperatives").then(
+    ({ email: cooperativeEmail, password: cooperativePassword }) => {
+      cy.createAccount("users").then(({ email, password }) => {
+        cy.loginAccount({ email, password }, "users").then(() => {
+          const { token } = JSON.parse(
+            localStorage.getItem("coletaiAccountData")
+          );
+
+          const collection = {
+            types: [{ name: "Plástico" }],
+            description: randText(),
+          };
+
+          const config = {
+            Authorization: `Bearer ${token}`,
+          };
+
+          cy.request({
+            method: "POST",
+            url: "http://localhost:4000/collections",
+            body: collection,
+            headers: config,
+            failOnStatusCode: false,
+          }).then(() =>
+            cy.wrap({ email: cooperativeEmail, password: cooperativePassword })
+          );
+        });
+      });
+    }
+  );
 });
