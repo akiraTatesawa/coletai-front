@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { IAccountContext } from "../../@types/AccountTypes";
 import { PrimaryButton } from "../../components/Button";
+import { FrontPageImage } from "../../components/FrontPageImage/index";
 import { Header } from "../../components/Header";
-import { HomepageImage } from "../../components/HomepageImage/index";
 import { AccountContext } from "../../contexts/AccountContext";
 import {
   Main,
@@ -47,7 +47,7 @@ export function FrontPage() {
     <Main>
       <Header />
       <Content>
-        <HomepageImage />
+        <FrontPageImage />
 
         <ButtonContainer>
           <IntroductionText>

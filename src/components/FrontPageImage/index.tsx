@@ -1,7 +1,7 @@
 import CooperativeIllustration from "../../assets/cooperative_illustration.png";
 import { Image } from "./styles";
 
-export function HomepageImage() {
+export function FrontPageImage() {
   return (
     <Image
       src={CooperativeIllustration}
