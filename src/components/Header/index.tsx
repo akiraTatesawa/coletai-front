@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <Container>
-      <Title title="Ir para página inicial" to="/">
+      <Title data-cy="logotype" title="Ir para página inicial" to="/">
         <RecycleIcon weight="bold" />
         <Name>Coletaí</Name>
       </Title>
