@@ -21,10 +21,16 @@ export function FrontPage() {
 
   const frontPageButtons = !accountData ? (
     <>
-      <PrimaryButton handleClick={() => navigate("/sign-up/cooperative")}>
+      <PrimaryButton
+        data-cy="sign-up-cooperative"
+        handleClick={() => navigate("/sign-up/cooperative")}
+      >
         Cadastrar cooperativa
       </PrimaryButton>
-      <PrimaryButton handleClick={() => navigate("/sign-up/user")}>
+      <PrimaryButton
+        data-cy="sign-up-user"
+        handleClick={() => navigate("/sign-up/user")}
+      >
         Cadastrar usuário
       </PrimaryButton>
     </>

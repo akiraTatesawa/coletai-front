@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 // ***********************************************
+import { randEmail, randPassword, randUserName } from "@ngneat/falso";
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
 // existing commands.
@@ -30,3 +30,9 @@
 Cypress.Commands.add("resetDatabase", () => {
   cy.request("DELETE", "http://localhost:4000/reset-database");
 });
+
+Cypress.Commands.add("createUser", () => ({
+  name: randUserName(),
+  email: randEmail(),
+  password: randPassword(),
+}));
