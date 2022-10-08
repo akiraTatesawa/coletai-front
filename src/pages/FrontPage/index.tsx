@@ -59,7 +59,10 @@ export function FrontPage() {
 
           {!accountData && (
             <Redirect>
-              Já possui cadastro? <Link to="/sign-in">Login</Link>
+              Já possui cadastro?
+              <Link data-cy="anchor-login" to="/sign-in">
+                Login
+              </Link>
             </Redirect>
           )}
         </ButtonContainer>

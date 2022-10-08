@@ -27,6 +27,7 @@ export function LoginForms({ route }: LoginFormsProps) {
   return (
     <Forms onSubmit={handleSubmitLoginData}>
       <Input
+        data-cy="input-login-email"
         id="email"
         label="Email"
         name="email"
@@ -38,6 +39,7 @@ export function LoginForms({ route }: LoginFormsProps) {
         disabled={mutation.isLoading}
       />
       <Input
+        data-cy="input-login-password"
         id="password"
         label="Senha"
         name="password"
@@ -49,7 +51,11 @@ export function LoginForms({ route }: LoginFormsProps) {
         disabled={mutation.isLoading}
       />
 
-      <PrimaryButton disabled={mutation.isLoading} type="submit">
+      <PrimaryButton
+        data-cy="button-submit-login"
+        disabled={mutation.isLoading}
+        type="submit"
+      >
         Entrar
       </PrimaryButton>
     </Forms>

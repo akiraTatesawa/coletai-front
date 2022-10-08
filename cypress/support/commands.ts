@@ -1,6 +1,12 @@
 /// <reference types="cypress" />
 // ***********************************************
-import { randEmail, randPassword, randUserName } from "@ngneat/falso";
+import {
+  randEmail,
+  randLatitude,
+  randLongitude,
+  randPassword,
+  randUserName,
+} from "@ngneat/falso";
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
 // existing commands.
@@ -31,8 +37,19 @@ Cypress.Commands.add("resetDatabase", () => {
   cy.request("DELETE", "http://localhost:4000/reset-database");
 });
 
-Cypress.Commands.add("createUser", () => ({
-  name: randUserName(),
-  email: randEmail(),
-  password: randPassword(),
-}));
+Cypress.Commands.add("createAccount", (accountType) => {
+  const user = {
+    name: randUserName(),
+    email: randEmail(),
+    password: randPassword(),
+    latitude: randLatitude(),
+    longitude: randLongitude(),
+  };
+
+  cy.request({
+    method: "POST",
+    url: `http://localhost:4000/${accountType}`,
+    body: user,
+    failOnStatusCode: false,
+  }).then(() => cy.wrap(user));
+});

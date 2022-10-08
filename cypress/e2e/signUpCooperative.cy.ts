@@ -1,11 +1,11 @@
 import { randUserName, randEmail, randPassword } from "@ngneat/falso";
 
-describe("User Registration", () => {
+describe("Cooperative Registration", () => {
   beforeEach(() => {
     cy.resetDatabase();
   });
 
-  it("Should be able to register an user", () => {
+  it("Should be able to register a cooperative", () => {
     cy.visit("http://localhost:5173/");
 
     cy.get("[data-cy='sign-up-cooperative']").click();
@@ -34,7 +34,7 @@ describe("User Registration", () => {
     cy.url().should("equal", "http://localhost:5173/sign-in");
   });
 
-  it("Should not be able to create an user if map was not clicked", () => {
+  it("Should not be able to create a cooperative if map was not clicked", () => {
     cy.visit("http://localhost:5173/");
 
     cy.get("[data-cy='sign-up-cooperative']").click();

@@ -1,5 +1,5 @@
 declare namespace Cypress {
-  interface User {
+  interface Account {
     name: string;
     email: string;
     password: string;
@@ -7,10 +7,10 @@ declare namespace Cypress {
     longitude: number;
   }
 
-  type CreateUser = Omit<User, "latitude" | "longitude">;
+  type CreateAccount = Omit<Account, "latitude" | "longitude">;
 
   interface Chainable<Subject = any> {
     resetDatabase(data: void): Chainable<void>;
-    createUser(): CreateUser;
+    createAccount(accountType: "users" | "cooperatives"): Chainable<Account>;
   }
 }
