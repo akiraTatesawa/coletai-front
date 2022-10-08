@@ -32,6 +32,7 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
   return (
     <Forms onSubmit={handleSubmitLoginData}>
       <Input
+        data-cy="input-account-name"
         id="name"
         label="Nome"
         name="name"
@@ -43,6 +44,7 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         disabled={mutation.isLoading}
       />
       <Input
+        data-cy="input-account-email"
         id="email"
         label="Email"
         name="email"
@@ -54,6 +56,7 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         disabled={mutation.isLoading}
       />
       <Input
+        data-cy="input-account-password"
         id="password"
         label="Senha"
         name="password"
@@ -72,7 +75,11 @@ export function SignUpForms({ registrationName }: SignUpFormsProps) {
         />
       )}
 
-      <PrimaryButton type="submit" disabled={mutation.isLoading}>
+      <PrimaryButton
+        data-cy="button-submit-registration"
+        type="submit"
+        disabled={mutation.isLoading}
+      >
         Cadastrar
       </PrimaryButton>
     </Forms>

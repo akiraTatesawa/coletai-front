@@ -67,6 +67,7 @@ export function CancelDialog({
 
                 <div className="mt-4 flex items-center justify-center gap-6">
                   <button
+                    data-cy="button-exit-cancel-modal"
                     type="button"
                     className="rounded-md border border-transparent bg-brand-100 px-4 py-2 text-sm md:text-base font-medium text-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:opacity-50"
                     onClick={() => setIsOpen(false)}
@@ -75,6 +76,7 @@ export function CancelDialog({
                     Não, retornar
                   </button>
                   <button
+                    data-cy="button-confirm-cancel"
                     type="button"
                     className="rounded-md border border-transparent bg-error-100 px-4 py-2 text-sm md:text-base font-medium text-error-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-error-400 focus-visible:ring-offset-2 disabled:opacity-50"
                     onClick={handleCancellationClick}

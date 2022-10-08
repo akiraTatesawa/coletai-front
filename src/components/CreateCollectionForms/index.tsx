@@ -85,7 +85,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
   }, [isSuccess]);
 
   return (
-    <FormsContainer>
+    <FormsContainer data-cy="collection-forms">
       <FormsTitle>Criar coleta</FormsTitle>
       <CloseButton>
         <XIcon weight="bold" />
@@ -94,6 +94,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
         <TypesContainer>
           {types.map((type) => (
             <Type
+              data-cy={`${type.name}-type`}
               disabled={isLoading}
               key={type.name}
               handleTypeChange={handleTypeChange}
@@ -102,6 +103,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
           ))}
         </TypesContainer>
         <DescriptionTextarea
+          data-cy="textarea-description"
           name="description"
           value={formData.description}
           onChange={handleDescriptionChange}
@@ -111,6 +113,7 @@ export function CreateCollectionForms({ close }: CreateCollectionFormsProps) {
           required
         />
         <SubmitCollectionButton
+          data-cy="button-submit-collection"
           as={PrimaryButton}
           type="submit"
           disabled={isLoading}

@@ -38,7 +38,7 @@ export function RegistrationMap({
   registrationCoords,
 }: RegistrationMapProps) {
   return (
-    <Fieldset>
+    <Fieldset data-cy="map-registration">
       <Legend>
         <h3>Endereço</h3>
         <span>Selecione o endereço no mapa</span>

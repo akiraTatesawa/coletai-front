@@ -22,11 +22,13 @@ export function LoginPage() {
         <LoginTitle>Logar como:</LoginTitle>
         <LoginTypeContainer>
           <LoginTypeButton
+            data-cy="select-cooperative-login"
             onClick={handleCooperativeClick}
             isSelected={isCooperative}
             loginType="cooperative"
           />
           <LoginTypeButton
+            data-cy="select-user-login"
             onClick={handleUserClick}
             isSelected={isUser}
             loginType="user"

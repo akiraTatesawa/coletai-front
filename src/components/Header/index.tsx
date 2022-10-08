@@ -19,13 +19,17 @@ export function Header() {
 
   return (
     <Container>
-      <Title title="Ir para página inicial" to="/">
+      <Title data-cy="logotype" title="Ir para página inicial" to="/">
         <RecycleIcon weight="bold" />
         <Name>Coletaí</Name>
       </Title>
       {accountData && (
         <Logout title="Log out">
-          <Button type="button" onClick={() => setIsOpen(true)}>
+          <Button
+            data-cy="logout"
+            type="button"
+            onClick={() => setIsOpen(true)}
+          >
             <LogoutIcon weight="bold" />
           </Button>
         </Logout>

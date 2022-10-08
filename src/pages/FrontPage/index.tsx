@@ -21,15 +21,24 @@ export function FrontPage() {
 
   const frontPageButtons = !accountData ? (
     <>
-      <PrimaryButton handleClick={() => navigate("/sign-up/cooperative")}>
+      <PrimaryButton
+        data-cy="sign-up-cooperative"
+        handleClick={() => navigate("/sign-up/cooperative")}
+      >
         Cadastrar cooperativa
       </PrimaryButton>
-      <PrimaryButton handleClick={() => navigate("/sign-up/user")}>
+      <PrimaryButton
+        data-cy="sign-up-user"
+        handleClick={() => navigate("/sign-up/user")}
+      >
         Cadastrar usuário
       </PrimaryButton>
     </>
   ) : (
-    <PrimaryButton handleClick={() => navigate("/dashboard")}>
+    <PrimaryButton
+      data-cy="dashboard"
+      handleClick={() => navigate("/dashboard")}
+    >
       Ir para dashboard
     </PrimaryButton>
   );
@@ -53,7 +62,10 @@ export function FrontPage() {
 
           {!accountData && (
             <Redirect>
-              Já possui cadastro? <Link to="/sign-in">Login</Link>
+              Já possui cadastro?{" "}
+              <Link data-cy="anchor-login" to="/sign-in">
+                Login
+              </Link>
             </Redirect>
           )}
         </ButtonContainer>
