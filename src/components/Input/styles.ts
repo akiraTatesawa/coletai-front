@@ -42,6 +42,12 @@ export const StyledInput = styled.input`
     opacity: 0.5;
     cursor: default;
   }
+
+  &:focus {
+    outline-color: var(--brand);
+    outline-width: 1px;
+    outline-offset: 2px;
+  }
 `;
 
 const iconCSS = css`
@@ -63,6 +69,12 @@ export const Button = styled.button`
     background-color: var(--surface-input);
     opacity: 0.5;
     cursor: default;
+  }
+
+  &:focus {
+    outline-color: var(--brand);
+    outline-width: 1px;
+    outline-offset: 2px;
   }
 `;
 

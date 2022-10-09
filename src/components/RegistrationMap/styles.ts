@@ -32,6 +32,12 @@ export const Map = styled(MapContainer)`
 
   border-radius: 10px;
 
+  &:focus {
+    outline-color: var(--brand);
+    outline-width: 1px;
+    outline-offset: 2px;
+  }
+
   @media (min-width: 600px) {
     height: 45vh;
   }

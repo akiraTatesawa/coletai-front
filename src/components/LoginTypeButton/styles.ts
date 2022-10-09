@@ -4,7 +4,7 @@ export const Button = styled.button<{ isSelected: boolean }>`
   width: 6.25rem;
   height: 6.25rem;
 
-  border: ${(props) => (props.isSelected ? "1px solid var(--brand)" : "none")};
+  border: ${(props) => (props.isSelected ? "2px solid var(--brand)" : "none")};
   border-radius: 10px;
 
   background-color: var(--surface-brand);
@@ -24,5 +24,11 @@ export const Button = styled.button<{ isSelected: boolean }>`
     height: 8.25rem;
 
     font-size: 1rem;
+  }
+
+  &:focus {
+    outline-color: var(--brand);
+    outline-width: 2px;
+    outline-offset: 2px;
   }
 `;
