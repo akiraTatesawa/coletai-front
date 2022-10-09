@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { IAccountContext } from "../../@types/AccountTypes";
 import { PrimaryButton } from "../../components/Button";
+import { FrontPageImage } from "../../components/FrontPageImage/index";
+import { FrontPageInfo } from "../../components/FrontPageInfo";
 import { Header } from "../../components/Header";
-import { HomepageImage } from "../../components/HomepageImage/index";
 import { AccountContext } from "../../contexts/AccountContext";
 import {
   Main,
-  Content,
+  MainContent,
   Buttons,
   Redirect,
   ButtonContainer,
@@ -46,8 +47,8 @@ export function FrontPage() {
   return (
     <Main>
       <Header />
-      <Content>
-        <HomepageImage />
+      <MainContent>
+        <FrontPageImage />
 
         <ButtonContainer>
           <IntroductionText>
@@ -69,7 +70,9 @@ export function FrontPage() {
             </Redirect>
           )}
         </ButtonContainer>
-      </Content>
+      </MainContent>
+
+      <FrontPageInfo />
     </Main>
   );
 }

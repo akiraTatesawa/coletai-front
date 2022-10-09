@@ -26,7 +26,7 @@ const containerCSS = css`
   width: 100%;
 `;
 
-export const Content = styled.div`
+export const MainContent = styled.div`
   ${containerCSS}
 
   @media (min-width: 1025px) {

@@ -18,6 +18,10 @@ module.exports = {
           400: "#E9635A",
           600: "#BC1D2E",
         },
+        info: {
+          400: "#187FF4",
+          500: "#1162D1",
+        },
         "brand-text": {
           primary: "#22394A",
           secondary: "#6C7C80",
