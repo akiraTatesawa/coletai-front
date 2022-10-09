@@ -42,8 +42,16 @@ export function FrontPageInfo() {
         />
       )}
 
-      <span className="text-sm text-brand-700 font-medium">
-        Feito com ❤️ por Arthur Akira
+      <span className="text-sm text-brand-text-secondary">
+        Feito com ❤️ por{" "}
+        <a
+          href="https://github.com/akiraTatesawa"
+          target="_blank"
+          rel="noreferrer"
+          className="text-info-400 focus:outline-info-500 font-medium"
+        >
+          Arthur Akira
+        </a>
       </span>
     </Container>
   );

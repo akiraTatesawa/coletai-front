@@ -13,12 +13,6 @@ export const Container = styled.div`
   justify-content: center;
 
   gap: 2rem;
-
-  /* @media (min-width: 600px) {
-    flex-direction: row;
-
-    align-items: flex-start;
-  } */
 `;
 
 export const Title = styled.h2`
@@ -28,6 +22,10 @@ export const Title = styled.h2`
   opacity: 0.8;
 
   text-align: center;
+
+  @media (min-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 export const Map = styled(MapContainer)`
