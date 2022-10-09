@@ -36,4 +36,6 @@ export const Map = styled(MapContainer)`
   aspect-ratio: 1;
 
   border-radius: 5px;
+
+  margin-top: 1.5rem;
 `;

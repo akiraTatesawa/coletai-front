@@ -6,6 +6,7 @@ import {
   IInputLoginData,
   IInputRegistrationData,
 } from "../../@types/AuthTypes";
+import { CooperativeNameLocation } from "../../@types/CooperativeTypes";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -56,4 +57,10 @@ export async function cancelCollection({ config, id }: IApiPatchData) {
 
 export async function finishCollection({ config, id }: IApiPatchData) {
   return api.patch(`/collections/${id}/finish`, {}, config);
+}
+
+export async function getCooperativesNameLocation(): Promise<
+  AxiosResponse<CooperativeNameLocation[]>
+> {
+  return api.get("/cooperatives/name-location");
 }
