@@ -36,4 +36,10 @@ export const Map = styled(MapContainer)`
   border-radius: 5px;
 
   margin-top: 1.5rem;
+
+  &:focus {
+    outline-color: var(--brand);
+    outline-width: 1px;
+    outline-offset: 2px;
+  }
 `;
