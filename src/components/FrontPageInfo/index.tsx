@@ -19,7 +19,7 @@ function FrontPageMap({ currentLocation, cooperatives }: FrontPageMapProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {cooperatives.map(({ name, latitude: lat, longitude: lng }) => (
-        <Marker position={{ lat, lng }}>
+        <Marker key={name} position={{ lat, lng }}>
           <Popup>{name}</Popup>
         </Marker>
       ))}
