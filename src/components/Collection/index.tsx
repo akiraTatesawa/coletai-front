@@ -1,29 +1,13 @@
+import { CaretDown } from "phosphor-react";
 import React from "react";
+import AnimateHeight from "react-animate-height";
 
 import { Account, IAccountContext } from "../../@types/AccountTypes";
 import { CollectionStatus, CollectionData } from "../../@types/CollectionTypes";
 import { AccountContext } from "../../contexts/AccountContext";
 import { useCollectionFinish } from "../../hooks/useCollectionFinish/index";
 import { CancelDialog } from "../CancelDialog";
-import {
-  CollectionContainer,
-  CollectionHeader,
-  Name,
-  Status,
-  Types,
-  Description,
-  NameContainer,
-  CooperativeIcon,
-  UserIcon,
-  OngoingIcon,
-  CancelledIcon,
-  FinishedIcon,
-  StatusTitle,
-  TypeText,
-  Options,
-  CancelButton,
-  FinishButton,
-} from "./styles";
+import S from "./styles";
 
 interface AccountIconProps {
   accountType: Account;
@@ -35,23 +19,23 @@ interface CollectionStatusProps {
 
 // The accountType props comes from the context/localStorage
 function AccountIcon({ accountType }: AccountIconProps) {
-  const icon = accountType === "user" ? <CooperativeIcon /> : <UserIcon />;
+  const icon = accountType === "user" ? <S.CooperativeIcon /> : <S.UserIcon />;
 
   return icon;
 }
 
 function StatusContainer({ status }: CollectionStatusProps) {
-  let icon: JSX.Element = <OngoingIcon weight="fill" />;
+  let icon: JSX.Element = <S.OngoingIcon weight="fill" />;
   let title = "coleta solicitada";
 
   function setStatusData(status: CollectionStatus) {
     if (status === "cancelled") {
-      icon = <CancelledIcon weight="fill" />;
+      icon = <S.CancelledIcon weight="fill" />;
       title = "coleta cancelada";
       return;
     }
     if (status === "finished") {
-      icon = <FinishedIcon weight="fill" />;
+      icon = <S.FinishedIcon weight="fill" />;
       title = "coleta finalizada";
     }
   }
@@ -59,10 +43,10 @@ function StatusContainer({ status }: CollectionStatusProps) {
   setStatusData(status);
 
   return (
-    <Status>
+    <S.Status>
       {icon}
-      <StatusTitle>{title}</StatusTitle>
-    </Status>
+      <S.StatusTitle>{title}</S.StatusTitle>
+    </S.Status>
   );
 }
 
@@ -77,62 +61,84 @@ export function Collection({
   const { handleFinishCollection, isFinishing } = useCollectionFinish();
   const { accountData } = React.useContext(AccountContext) as IAccountContext;
   const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false);
+  const [isDetailsOpen, setIsDetailsOpen] = React.useState<boolean>(false);
+
   const typesFormatted = types.map(({ name }) => name);
 
   return (
-    <CollectionContainer>
-      <CollectionHeader>
-        <NameContainer>
+    <S.CollectionContainer>
+      <S.CollectionHeader>
+        <S.NameContainer>
           <AccountIcon accountType={accountData?.account || "user"} />
-          <Name>
+          <S.Name>
             {accountData?.account === "user" ? cooperative.name : user.name}
-          </Name>
-        </NameContainer>
+          </S.Name>
+
+          <S.ViewMoreButton
+            type="button"
+            isOpen={isDetailsOpen}
+            onClick={() => setIsDetailsOpen(!isDetailsOpen)}
+          >
+            <CaretDown />
+          </S.ViewMoreButton>
+        </S.NameContainer>
 
         <StatusContainer status={status} />
-      </CollectionHeader>
+      </S.CollectionHeader>
 
-      <Types>
+      <S.Types>
         {`tipos de materiais: `}
-        <TypeText>{typesFormatted.join(", ")}</TypeText>
-      </Types>
+        <S.TypeText>{typesFormatted.join(", ")}</S.TypeText>
+      </S.Types>
 
-      <Description>{description}</Description>
+      <AnimateHeight
+        height={isDetailsOpen ? "auto" : 0}
+        duration={500}
+        style={{ width: "100%" }}
+      >
+        <S.DetailsContainer>
+          <S.DescriptionContainer>
+            <span>Descrição</span>
+            <S.Description>{description}</S.Description>
+          </S.DescriptionContainer>
+
+          {accountData?.account === "cooperative" && status === "ongoing" && (
+            <S.AddressContainer>
+              <span>Endereço</span>
+              <S.Address className="text-sm text-brand-text-secondary opacity-90">
+                {user.address}
+              </S.Address>
+            </S.AddressContainer>
+          )}
+        </S.DetailsContainer>
+      </AnimateHeight>
 
       {accountData?.account === "cooperative" && status === "ongoing" && (
-        <span className="text-sm text-brand-text-secondary opacity-90">
-          {user.address}
-        </span>
+        <S.Options>
+          <S.CancelButton
+            data-cy="button-cancel-collection"
+            type="button"
+            onClick={() => setIsDialogOpen(true)}
+            disabled={isFinishing}
+          >
+            Cancelar
+          </S.CancelButton>
+          <S.FinishButton
+            data-cy="button-finish-collection"
+            type="button"
+            onClick={() => handleFinishCollection(id)}
+            disabled={isFinishing}
+          >
+            Finalizar
+          </S.FinishButton>
+        </S.Options>
       )}
-
-      <Options>
-        {accountData?.account === "cooperative" && status === "ongoing" && (
-          <>
-            <CancelButton
-              data-cy="button-cancel-collection"
-              type="button"
-              onClick={() => setIsDialogOpen(true)}
-              disabled={isFinishing}
-            >
-              Cancelar
-            </CancelButton>
-            <FinishButton
-              data-cy="button-finish-collection"
-              type="button"
-              onClick={() => handleFinishCollection(id)}
-              disabled={isFinishing}
-            >
-              Finalizar
-            </FinishButton>
-          </>
-        )}
-      </Options>
 
       <CancelDialog
         isOpen={isDialogOpen}
         setIsOpen={setIsDialogOpen}
         collectionId={id}
       />
-    </CollectionContainer>
+    </S.CollectionContainer>
   );
 }

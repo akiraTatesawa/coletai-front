@@ -7,7 +7,7 @@ import {
 } from "phosphor-react";
 import styled, { css } from "styled-components";
 
-export const CollectionContainer = styled.div`
+const CollectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -22,20 +22,39 @@ export const CollectionContainer = styled.div`
   border-radius: 4px;
 `;
 
-export const CollectionHeader = styled.div`
+const CollectionHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 `;
 
-export const NameContainer = styled.div`
+const NameContainer = styled.div`
   display: flex;
   align-items: flex-end;
+  justify-content: flex-start;
 
   gap: 1rem;
 
   padding-bottom: 0.375rem;
   border-bottom: 1px solid rgba(108, 124, 128, 0.2);
+
+  position: relative;
+`;
+
+const ViewMoreButton = styled.button<{ isOpen: boolean }>`
+  position: absolute;
+  right: 0;
+  color: var(--text-primary);
+
+  font-size: 1.2rem;
+
+  transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "unset")};
+
+  transition: transform 500ms ease-in-out;
+
+  &:focus {
+    outline-color: var(--text-secondary);
+  }
 `;
 
 const accountIconCSS = css`
@@ -45,15 +64,15 @@ const accountIconCSS = css`
   flex-shrink: 0;
 `;
 
-export const UserIcon = styled(User)`
+const UserIcon = styled(User)`
   ${accountIconCSS}
 `;
 
-export const CooperativeIcon = styled(Factory)`
+const CooperativeIcon = styled(Factory)`
   ${accountIconCSS}
 `;
 
-export const Name = styled.span`
+const Name = styled.span`
   font-size: 1rem;
   color: var(--text-primary);
   font-weight: 500;
@@ -63,7 +82,7 @@ export const Name = styled.span`
   text-overflow: ellipsis;
 `;
 
-export const Status = styled.div`
+const Status = styled.div`
   display: flex;
   align-items: flex-end;
 
@@ -74,48 +93,77 @@ const statusIconCSS = css`
   font-size: 1.2rem;
 `;
 
-export const CancelledIcon = styled(XCircle)`
+const CancelledIcon = styled(XCircle)`
   ${statusIconCSS}
   fill: #DB282C;
 `;
 
-export const OngoingIcon = styled(DotsThreeCircle)`
+const OngoingIcon = styled(DotsThreeCircle)`
   ${statusIconCSS}
   fill: #FFC700;
 `;
 
-export const FinishedIcon = styled(CheckCircle)`
+const FinishedIcon = styled(CheckCircle)`
   ${statusIconCSS}
   fill: #31BB6F;
 `;
 
-export const StatusTitle = styled.span`
+const StatusTitle = styled.span`
   font-size: 0.875rem;
   line-height: 1rem;
   color: var(--text-secondary);
 `;
 
-export const Types = styled.span`
+const Types = styled.span`
   color: var(--text-primary);
   font-size: 0.875rem;
   line-height: 1rem;
 `;
 
-export const TypeText = styled.span`
+const TypeText = styled.span`
   color: var(--text-secondary);
 `;
 
-export const Description = styled.p`
+const DetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+`;
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  > span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+`;
+
+const Description = styled.p`
   color: var(--text-primary);
   opacity: 0.8;
-  font-size: 1rem;
-  line-height: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
 
-  text-align: justify;
-  text-justify: inter-word;
+  white-space: pre-line;
 `;
 
-export const Options = styled.div`
+const AddressContainer = styled(DescriptionContainer)``;
+
+const Address = styled.p`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0.9;
+  color: var(--text-secondary);
+`;
+
+const Options = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,7 +176,7 @@ export const Options = styled.div`
   gap: 1rem;
 `;
 
-export const CancelButton = styled.button`
+const CancelButton = styled.button`
   color: var(--danger-error);
   font-weight: 500;
 
@@ -142,7 +190,7 @@ export const CancelButton = styled.button`
   }
 `;
 
-export const FinishButton = styled.button`
+const FinishButton = styled.button`
   color: var(--brand);
   font-weight: 500;
 
@@ -157,3 +205,28 @@ export const FinishButton = styled.button`
     opacity: 0.5;
   }
 `;
+
+export default {
+  CollectionContainer,
+  CollectionHeader,
+  NameContainer,
+  ViewMoreButton,
+  UserIcon,
+  CooperativeIcon,
+  Name,
+  Status,
+  CancelledIcon,
+  OngoingIcon,
+  FinishedIcon,
+  StatusTitle,
+  Types,
+  TypeText,
+  DetailsContainer,
+  DescriptionContainer,
+  Description,
+  AddressContainer,
+  Address,
+  Options,
+  CancelButton,
+  FinishButton,
+};

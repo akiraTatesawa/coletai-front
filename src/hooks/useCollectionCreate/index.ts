@@ -2,7 +2,6 @@ import { AxiosError } from "axios";
 import React from "react";
 import { useMutation } from "react-query";
 
-import { IAccountData } from "../../@types/AccountTypes";
 import { IAxiosErrorData } from "../../@types/APITypes";
 import {
   CreateCollectionFormData,
@@ -10,22 +9,15 @@ import {
 } from "../../@types/CollectionTypes";
 import { createCollection } from "../../services/lib";
 import { queryClient } from "../../services/queryClient/queryClient";
-import { useLocalStorage } from "../useLocalStorage/index";
+import { useAxiosConfig } from "../useAxiosConfig/index";
+import { useLogout } from "../useLogout/index";
 import { useToast } from "../useToast/index";
 
 export function useCollectionCreate() {
-  const [accountData] = useLocalStorage<IAccountData | null>(
-    "coletaiAccountData",
-    null
-  );
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accountData?.token}`,
-    },
-  };
-
+  const [config] = useAxiosConfig();
+  const { handleLogout } = useLogout();
   const { callToast } = useToast();
+
   const [formData, setFormData] = React.useState<CreateCollectionFormData>({
     types: [],
     description: "",
@@ -45,6 +37,12 @@ export function useCollectionCreate() {
         id: 10,
         toastType: "error",
       });
+
+      if (data.response?.status === 404) {
+        setTimeout(() => {
+          handleLogout();
+        }, 1500);
+      }
     },
     onSettled: () => {
       queryClient.invalidateQueries("create");
