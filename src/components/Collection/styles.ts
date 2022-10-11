@@ -41,6 +41,8 @@ export const NameContainer = styled.div`
 const accountIconCSS = css`
   font-size: 2rem;
   color: var(--text-primary);
+
+  flex-shrink: 0;
 `;
 
 export const UserIcon = styled(User)`
@@ -55,6 +57,10 @@ export const Name = styled.span`
   font-size: 1rem;
   color: var(--text-primary);
   font-weight: 500;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Status = styled.div`

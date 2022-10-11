@@ -88,13 +88,23 @@ export function Collection({
             {accountData?.account === "user" ? cooperative.name : user.name}
           </Name>
         </NameContainer>
+
         <StatusContainer status={status} />
       </CollectionHeader>
+
       <Types>
         {`tipos de materiais: `}
         <TypeText>{typesFormatted.join(", ")}</TypeText>
       </Types>
+
       <Description>{description}</Description>
+
+      {accountData?.account === "cooperative" && status === "ongoing" && (
+        <span className="text-sm text-brand-text-secondary opacity-90">
+          {user.address}
+        </span>
+      )}
+
       <Options>
         {accountData?.account === "cooperative" && status === "ongoing" && (
           <>
@@ -117,6 +127,7 @@ export function Collection({
           </>
         )}
       </Options>
+
       <CancelDialog
         isOpen={isDialogOpen}
         setIsOpen={setIsDialogOpen}
