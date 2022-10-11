@@ -20,6 +20,7 @@ export type CollectionStatus = "ongoing" | "cancelled" | "finished";
 export interface EntityData {
   id: string;
   name: string;
+  address: string;
 }
 
 export interface CollectionData {
