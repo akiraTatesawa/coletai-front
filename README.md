@@ -20,7 +20,8 @@ Registered users can request collections from the cooperatives, which in turn ha
 
 ## Mockups
 
-<!-- Unfinished -->
+![flat-devices-mockup](https://user-images.githubusercontent.com/102376051/197415082-21b5d093-4a1e-4f85-bc1e-9a4f2b3e9328.png)
+![standing-iphone-mockup](https://user-images.githubusercontent.com/102376051/197415091-b1a14849-669a-4df0-b3a8-46d269710bbd.png)
 
 ## Features
 
